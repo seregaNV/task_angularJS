@@ -1,0 +1,26 @@
+{
+  "name": "angular-js",
+  "version": "1.0.0",
+  "description": "All tasks for AngulsrJS.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seregaNV/task_angularJS.git"
+  },
+  "keywords": [
+    "angular",
+    "JS"
+  ],
+  "author": "\"seregaNV <serega.n.v333@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seregaNV/task_angularJS/issues"
+  },
+  "homepage": "https://github.com/seregaNV/task_angularJS#readme",
+  "dependencies": {
+    "http-server": "^0.8.5"
+  }
+}
