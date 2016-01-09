@@ -1,0 +1,124 @@
+.total-container {
+    padding-top: 70px;
+    /*overflow-x: hidden;*/
+}
+#logo-angular{
+    margin-top: -14px;
+}
+footer {
+    padding: 30px 0;
+}
+#jumbo-phonecat {
+    background: url(../img/jumbotron-phonecat.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    text-shadow: 2px 3px 5px rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#sa-jumbo {
+    background: url(../img/jumbotron-angular.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    text-shadow: 10px 15px 8px rgb(176, 106, 96);
+    color: rgb(130, 14, 14);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.catalog-left {
+    position: fixed;
+    width: auto;
+}
+.catalog-right {
+    float: right
+}
+.preview-img {
+    height: 200px;
+    margin-bottom: 16px;
+    position: relative;
+}
+.preview-img img {
+    max-height: 200px;
+}
+
+.preview-img .label{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 1;
+    display: block;
+}
+h2 {
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.item {
+    height: 400px;
+}
+
+img.phone {
+    float: left;
+    margin-right: 3em;
+    margin-bottom: 2em;
+    background-color: white;
+    padding: 2em;
+    width: 100%;
+    display: none;
+}
+
+img.phone:first-child {
+    display: block;
+}
+ul.phone-thumbs {
+    margin: 0;
+    list-style: none;
+}
+.phone-thumbs li {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    max-width: 100px;
+}
+.phone-thumbs li img {
+    width: 100%;
+}
+
+ul.phone-thumbs img:hover {
+    cursor: pointer;
+}
+.phone-images {
+    background-color: white;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+    float: left;
+}
+
+.specs li {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+}
+span.describe {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 15px;
+}
+
+.sa-list {
+    margin-top: 30px;
+}
+.sa-icons {
+    color: red;
+    cursor: pointer;
+}

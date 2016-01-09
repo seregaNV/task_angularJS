@@ -1,6 +1,7 @@
 {
   "name": "angular-js",
   "version": "1.0.0",
+  "private": true,
   "description": "All tasks for AngulsrJS.",
   "main": "index.html",
   "scripts": {
@@ -22,5 +23,10 @@
   "homepage": "https://github.com/seregaNV/task_angularJS#readme",
   "dependencies": {
     "http-server": "^0.8.5"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 3000"
   }
 }

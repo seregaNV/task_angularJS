@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+        <div class="phone-images">
+            <img ng-src="{{img}}"
+                 class="phone"
+                 ng-repeat="img in phone.images"
+                 ng-class="{active: mainImageUrl==img}">
+        </div>
+        <ul class="phone-thumbs">
+            <li ng-repeat="img in phone.images">
+                <img ng-src="{{img}}" ng-click="setImage(img)">
+            </li>
+        </ul>
+    </div>
+    <div class="col-xs-12 col-sm-7 col-md-8 col-lg-9">
+        <h1>{{ phone.name }}</h1>
+        <p>{{ phone.description }}</p>
+        <hr>
+        <ul class="specs list-unstyled">
+            <li>
+                <span class="describe"><strong>Availability and Networks</strong></span>
+                <dl>
+                    <dt>Availability:</dt>
+                    <dd ng-repeat="availability in phone.availability">{{ availability || '\u268A'}}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Battery</span>
+                <dl>
+                    <dt>Type:</dt>
+                    <dd>{{ phone.battery.type || '\u268A'}}</dd>
+                    <dt>Talk time:</dt>
+                    <dd>{{ phone.battery.talkTime || '\u268A'}}</dd>
+                    <dt>Standby time (max):</dt>
+                    <dd>{{ phone.battery.standbyTime || '\u268A'}}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Storage and Memory</span>
+                <dl>
+                    <dt>RAM:</dt>
+                    <dd>{{ phone.storage.ram || '\u268A'}}</dd>
+                    <dt>Internal storage:</dt>
+                    <dd>{{ phone.storage.flash || '\u268A'}}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Connectivity</span>
+                <dl>
+                    <dt>Network support:</dt>
+                    <dd>{{ phone.connectivity.cell || '\u268A'}}</dd>
+                    <dt>WiFi:</dt>
+                    <dd>{{ phone.connectivity.wifi || '\u268A'}}</dd>
+                    <dt>Bluetooth:</dt>
+                    <dd>{{ phone.connectivity.bluetooth || '\u268A'}}</dd>
+                    <dt>Infrared:</dt>
+                    <dd>{{ phone.connectivity.infrared | checkMark }}</dd>
+                    <dt>GPS:</dt>
+                    <dd>{{ phone.connectivity.gps | checkMark }}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Android</span>
+                <dl>
+                    <dt>OS Version:</dt>
+                    <dd>{{ phone.android.os || '\u268A'}}</dd>
+                    <dt>UI:</dt>
+                    <dd>{{ phone.android.ui || '\u268A'}}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Size and Weight</span>
+                <dl>
+                    <dt>Dimensions:</dt>
+                    <dd ng-repeat="dim in phone.sizeAndWeight.dimensions">{{ dim || '\u268A'}}</dd>
+                    <dt>Weight:</dt>
+                    <dd>{{ phone.sizeAndWeight.weight || '\u268A'}}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Display</span>
+                <dl>
+                    <dt>Screen size:</dt>
+                    <dd>{{ phone.display.screenSize || '\u268A'}}</dd>
+                    <dt>Screen resolution:</dt>
+                    <dd>{{ phone.display.screenResolution || '\u268A'}}</dd>
+                    <dt>Touch screen:</dt>
+                    <dd>{{ phone.display.touchScreen | checkMark }}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Hardware</span>
+                <dl>
+                    <dt>CPU:</dt>
+                    <dd>{{ phone.hardware.cpu || '\u268A'}}</dd>
+                    <dt>USB:</dt>
+                    <dd>{{ phone.hardware.usb || '\u268A'}}</dd>
+                    <dt>Audio / headphone jack:</dt>
+                    <dd>{{ phone.hardware.audioJack || '\u268A'}}</dd>
+                    <dt>FM Radio:</dt>
+                    <dd>{{ phone.hardware.fmRadio | checkMark }}</dd>
+                    <dt>Accelerometer:</dt>
+                    <dd>{{ phone.hardware.accelerometer | checkMark }}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Camera</span>
+                <dl>
+                    <dt>Primary:</dt>
+                    <dd>{{ phone.camera.primary || '\u268A'}}</dd>
+                    <dt>Features:</dt>
+                    <dd>{{ phone.camera.features.join(', ') || '\u268A'}}</dd>
+                </dl>
+            </li>
+            <li>
+                <span class="describe">Additional Features</span>
+                <p>{{ phone.additionalFeatures || '\u268A'}}</p>
+            </li>
+        </ul>
+    </div>
+
+</div>

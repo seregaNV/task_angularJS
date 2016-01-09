@@ -1,0 +1,15 @@
+
+<div class="jumbotron text-center" id="sa-jumbo">
+    <h1>Simple AngularJS</h1>
+    <p>Study of the basic concepts of AngularJS.</p>
+</div>
+<form class="form-inline">
+    <input type="text" class="form-control" ng-model="name" placeholder="Name" autofocus/>
+    <span ng-if="show">This is {{name}}!</span>
+    <input type="checkbox" ng-model="show">
+    <button type="submit" class="btn btn-default" ng-click="click()">OK</button>
+</form>
+
+<ul  class="list-unstyled sa-list">
+    <li ng-repeat="item in data"><i class="fa fa-times-circle-o sa-icons" ng-click="remove(item)"></i> {{item}}</li>
+</ul>
