@@ -10,6 +10,10 @@
                 templateUrl: 'template/home.html',
                 controller: 'PhoneListCtrl'
             })
+            .when('/phone-book', {
+                templateUrl: 'template/phone-book.html',
+                controller: 'PhonebookCtrl'
+            })
             .when('/about', {
                 templateUrl: 'template/about.html',
                 controller: 'AboutCtrl'

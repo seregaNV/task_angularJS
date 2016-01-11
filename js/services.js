@@ -5,9 +5,15 @@
             phoneId: 'phones',
             format: 'json',
             apiKey: 'someKeyThis'
-            /*http://localhost:8888/phones/phones.json?apiKey=someKeyThis*/
         }, {
-            /*action: {method: <?>, params: <?>, isArray: <?>, ...}*/
+            update: {method: 'PUT', params: {phoneId: 'phone'}, isArray: true} // {phoneId: '@phone'}
+        });
+    }
+    function phonebookFactory($resource) {
+        return $resource('data/:companyId.:format', {
+            companyId: 'companys',
+            format: 'json'
+        }, {
             update: {method: 'PUT', params: {phoneId: 'phone'}, isArray: true} // {phoneId: '@phone'}
         });
     }
@@ -17,5 +23,6 @@
         };
     }
     angular.module('phonecatApp').factory('Phone', ['$resource', phoneFactory]);
+    angular.module('phonecatApp').factory('Company', ['$resource', phonebookFactory]);
     angular.module('phonecatApp').factory('simpleFactory', eF);
 })();

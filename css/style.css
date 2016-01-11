@@ -122,3 +122,21 @@ span.describe {
     color: red;
     cursor: pointer;
 }
+.pb-companyImg {
+    width: 100px
+}
+.pb-group {
+    width: 100px;
+}
+ #jumbo-phonebook {
+     background: url(../img/jumbotron-phonebook.jpg) no-repeat 50% 50%;
+     background-size: cover;
+     text-shadow: 2px 3px 5px rgb(148, 148, 148);
+     color: rgb(234, 232, 232);
+     -webkit-touch-callout: none;
+     -webkit-user-select: none;
+     -khtml-user-select: none;
+     -moz-user-select: none;
+     -ms-user-select: none;
+     user-select: none;
+ }

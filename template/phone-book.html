@@ -1,0 +1,44 @@
+<div ng-controller="PhonebookCtrl" ng-switch on = "view">
+    <div class="jumbotron text-center" id="jumbo-phonebook">
+        <h1>Phonebook</h1>
+        <p>This is an example of an application written in AngularJs.</p>
+    </div>
+    <form class="form-inline">
+        <div class="form-group">
+            <label for="searchCompanyInput">Company: </label>
+            <input type="text" class="form-control" id="searchCompanyInput" placeholder="Search..." ng-model = "query">
+        </div>
+        <div class="btn-group pull-right" role="group" aria-label="...">
+            <button type="button" class="btn btn-default pb-group" ng-click = " view = 'list' ">
+                <span class="glyphicon glyphicon-th-large"></span>
+            </button>
+            <button type="button" class="btn btn-default pb-group" ng-click = " view = 'table' ">
+                <span class="glyphicon glyphicon-th-list"></span>
+            </button>
+        </div>
+    </form>
+    <br>
+    <div ng-switch-when="list">
+        <pb-company-card ng-repeat="company in companys | filter:query" company="company"></pb-company-card>
+    </div>
+    <div ng-switch-when="table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Company</th>
+                    <th>Country</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="company in companys | filter:query">
+                    <td>{{ $index + 1 }}</td>
+                    <td>{{ company.company }}</td>
+                    <td>{{ company.country }}</td>
+                    <td>{{ company.phone }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -40,10 +40,15 @@
             console.log('arr: ', $scope.data);
         };
     }
+    function phonebookCtrl($scope, Company) {
+        $scope.companys = Company.query();
+        $scope.view = 'list';
+    }
     angular.module('phonecatApp')
         .controller('PhoneListCtrl', ['$scope', 'Phone', phoneListCtrl])
         .controller('AboutCtrl', ['$scope', aboutCtrl])
         .controller('ContactCtrl', ['$scope', contactCtrl])
         .controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone', phoneDetailCtrl])
+        .controller('PhonebookCtrl', ['$scope', 'Company', phonebookCtrl])
         .controller('SimpleAngularCtrl', ['$scope', 'simpleFactory', simpleAngularCtrl]);
 })();
