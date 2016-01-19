@@ -21,21 +21,21 @@
         <p>Quantity results: {{ phones.length }}</p>
     </div>
     <div class="col-xs-6 col-sm-8 catalog-right">
-        <div class="jumbotron text-center" id="jumbo-phonecat">
+        <div class="jumbotron text-center user-select-none" id="jumbo-phonecat">
             <h1>Phonecat App</h1>
             <p>This is an example of an application written in AngularJs.</p>
         </div>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-lg-4 item phone-listing" ng-repeat="phone in phones | filter:search | orderBy:orderProp" ng-if="phone.status || !show">
                 <div class="preview-img text-center">
-                    <a href="/phones/{{ phone.id }}"><img ng-src="{{ phone.imageUrl }}" alt="{{ phone.name }}"/></a>
+                    <a ui-sref="phones({ phoneId:phone.id })"><img ng-src="{{ phone.imageUrl }}" alt="{{ phone.name }}"/></a>
                         <span class="label"
                               ng-init="status = phone.status ? 'Are available' : 'Not available'"
                               ng-class="{'label-success':phone.status,'label-warning':!phone.status}">
                             {{ status }}
                         </span>
                 </div>
-                <h2><a href="/phones/{{ phone.id }}">{{ phone.name }}</a></h2>
+                <h2><a ui-sref="phones({ phoneId:phone.id })">{{ phone.name }}</a></h2>
                 <p>{{ phone.snippet }}</p>
             </div>
         </div>

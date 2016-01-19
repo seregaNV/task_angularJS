@@ -8,11 +8,12 @@
 footer {
     padding: 30px 0;
 }
-#jumbo-phonecat {
-    background: url(../img/jumbotron-phonecat.jpg) no-repeat 50% 50%;
-    background-size: cover;
-    text-shadow: 2px 3px 5px rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+#jumbo-home {
+    background: url(../img/jumbotron-home.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+.user-select-none {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -20,17 +21,17 @@ footer {
     -ms-user-select: none;
     user-select: none;
 }
+#jumbo-phonecat {
+    background: url(../img/jumbotron-phonecat.jpg) no-repeat 50% 50%;
+    background-size: cover;
+    text-shadow: 2px 3px 5px rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
 #sa-jumbo {
     background: url(../img/jumbotron-angular.jpg) no-repeat 50% 50%;
     background-size: cover;
     text-shadow: 10px 15px 8px rgb(176, 106, 96);
     color: rgb(130, 14, 14);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 }
 .catalog-left {
     position: fixed;
@@ -133,10 +134,107 @@ span.describe {
      background-size: cover;
      text-shadow: 2px 3px 5px rgb(148, 148, 148);
      color: rgb(234, 232, 232);
-     -webkit-touch-callout: none;
-     -webkit-user-select: none;
-     -khtml-user-select: none;
-     -moz-user-select: none;
-     -ms-user-select: none;
-     user-select: none;
  }
+
+
+ /*-------------------------------------------------------------------------------------------------*/
+
+#jumbo-trello {
+    background: url(../img/jumbotron-trello.png) no-repeat 50% 50%;
+    background-size: cover;
+}
+
+.t-lists-container{
+    padding: 20px;
+    position: relative;
+    background-color: #f0f6ff;
+    border-radius: 15px;
+    font-size: 16px;
+    font-family: 'Alegreya Sans', sans-serif;
+    font-style: italic;
+    color: #007095;
+    word-wrap: break-word;
+}
+
+.t-add-label{
+    margin: 10px 0;
+}
+
+.t-list h1{
+    margin: 15px 0;
+    width: 80%;
+}
+
+.t-descr-card {
+    margin-top: 15px;
+}
+
+.t-edition-input {
+    margin: 0;
+}
+
+.t-list{
+    width: 100%;
+    margin: 3px;
+    background-color: #dddfff;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #628DA4;
+    vertical-align: top;
+    position: relative;
+    display: inline-block;
+}
+
+.t-hand{
+    cursor: pointer;
+}
+
+.t-card {
+    position: relative;
+    padding: 20px;
+    margin: 10px 0;
+    background-color: #FFF;
+    border-radius: 4px;
+    border: 1px solid #b9b9b9;
+}
+
+.t-card:hover{
+    border-color: #628DA4;
+}
+
+.t-remove-list, .t-editing-list {
+    position : absolute;
+    margin: 6px;
+    top: 0;
+    right: 0;
+    -webkit-transition: 0.3s linear all;
+    -moz-transition: 0.3s linear all;
+    -o-transition: 0.3s linear all;
+    transition: 0.3s linear all;
+    color: #628DA4;
+}
+.t-editing-list {
+    right: 20px;
+}
+.t-hand :hover {
+    -webkit-transition: 0.3s linear all;
+    -moz-transition: 0.3s linear all;
+    -o-transition: 0.3s linear all;
+    transition: 0.3s linear all;
+    color: #005775;
+}
+
+.t-card-input {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.t-edition-input {
+    padding: 5px;
+}
+
+.t-select-list{
+    margin: 10px 0 0 0;
+}
+
+/*------------------------------------------------------------------------------------------------------------*/

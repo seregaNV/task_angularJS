@@ -1,5 +1,5 @@
 <div ng-controller="PhonebookCtrl" ng-switch on = "view">
-    <div class="jumbotron text-center" id="jumbo-phonebook">
+    <div class="jumbotron text-center user-select-none" id="jumbo-phonebook">
         <h1>Phonebook</h1>
         <p>This is an example of an application written in AngularJs.</p>
     </div>
@@ -20,6 +20,7 @@
     <br>
     <div ng-switch-when="list">
         <pb-company-card ng-repeat="company in companys | filter:query" company="company"></pb-company-card>
+        <p>rand: {{ rand }}</p>
     </div>
     <div ng-switch-when="table">
         <table class="table">

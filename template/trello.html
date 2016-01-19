@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="jumbotron" id="jumbo-trello">
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+    <section class="t-lists-container" ng-controller="ListsCtrl as ListsCtrl">
+        <div class="row">
+            <div class="col-xs-12 col-sm-3">
+                <section>
+                    <form ng-submit="ListsCtrl.addList()">
+                        <div class="form-group has-primary">
+                            <label class="control-label t-add-label" for="t-new-list">List name:</label>
+                            <input type="text"
+                                   class="form-control"
+                                   id="t-new-list"
+                                   ng-model="ListsCtrl.listName"
+                                   placeholder="Enter name"
+                                   autocomplete="off">
+                        </div>
+                        <button type="submit" class="btn btn-info">Create new list</button>
+                    </form>
+                    <br>
+                </section>
+            </div>
+            <div class="col-xs-12 col-sm-9">
+                <div class="row">
+                    <div class="col-xs-6 col-md-4 col-lg-3" ng-repeat="list in ListsCtrl.lists">
+                        <section class="t-list" ng-controller="ListCtrl as ListCtrl">
+                            <a ng-click="ListCtrl.removeList(list)" class="t-hand">
+                                <i class="t-remove-list fa fa-2x fa-times"></i>
+                            </a>
+                            <h1 class="text-center">{{ list.listName }}</h1>
+                            <div class="t-card"
+                                 ng-controller="CardCtrl as CardCtrl"
+                                 ng-repeat="card in ListCtrl.getCards(list)">
+                                <div ng-if="!CardCtrl.isEditing">
+                                    <a ng-click="CardCtrl.editCard(card)" class="t-hand">
+                                        <i class="t-editing-list fa fa-pencil"></i>
+                                    </a>
+                                    <a ng-click="CardCtrl.deleteCard(card)" class="t-hand">
+                                        <i class="t-remove-list fa fa-times"></i>
+                                    </a>
+                                    <p class="t-descr-card">{{ card.description }}</p>
+                                </div>
+                                <div ng-if="CardCtrl.isEditing">
+                                    <form ng-submit="CardCtrl.updateCard()">
+                                        <input type="text"
+                                               close-editing-dir
+                                               is-editing="CardCtrl.isEditing"
+                                               class="form-control t-edition-input"
+                                               ng-model="CardCtrl.editingCard.description"/>
+                                        <select class="form-control t-select-list"
+                                                ng-model="CardCtrl.editingCard.list_id"
+                                                ng-change="CardCtrl.updateCard()"
+                                                ng-options="list.id as list.listName for list in ListsCtrl.lists">
+                                        </select>
+                                    </form>
+                                </div>
+                            </div>
+                            <section class="t-new-card has-default">
+                                <form ng-submit="ListCtrl.createCard(list)">
+                                    <input type="text"
+                                           ng-model="ListCtrl.cardDescription"
+                                           class="form-control t-card-input"
+                                           placeholder="New card"/>
+                                </form>
+                            </section>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
