@@ -8,5 +8,5 @@
             update: {method: 'PUT', params: {phoneId: 'phone'}, isArray: true} // {phoneId: '@phone'}
         });
     }
-    angular.module('phonecatApp').factory('Company', ['$resource', phonebookFactory]);
+    angular.module('phonecatApp').factory('PhonebookFactory', ['$resource', phonebookFactory]);
 })();

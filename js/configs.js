@@ -22,10 +22,6 @@
                 templateUrl: 'template/trello.html',
                 controller: 'ListsCtrl'
             })
-            .state('contact', {
-                url: '/contact',
-                templateUrl: 'template/contact.html'
-            })
             .state('phones', {
                 url: '/phones/:phoneId',
                 templateUrl: 'template/phone-detail.html',
@@ -34,6 +30,11 @@
             .state('simple-angular', {
                 url: '/simple-angular',
                 templateUrl: 'template/simple-angular.html',
+                controller: 'SimpleAngularCtrl'
+            })
+            .state('rozklad', {
+                url: '/rozklad',
+                templateUrl: 'template/rozklad.html',
                 controller: 'SimpleAngularCtrl'
             })
     }

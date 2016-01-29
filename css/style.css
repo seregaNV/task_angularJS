@@ -123,8 +123,12 @@ span.describe {
     color: red;
     cursor: pointer;
 }
+.pb-companys-container {
+    position: inherit;
+    margin-top: 20px;
+}
 .pb-companyImg {
-    width: 100px
+    height: 150px;
 }
 .pb-group {
     width: 100px;
@@ -238,3 +242,9 @@ span.describe {
 }
 
 /*------------------------------------------------------------------------------------------------------------*/
+
+
+
+
+html, body { height: 100%; margin: 0; padding: 0; }
+#map { height: 100%; }

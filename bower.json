@@ -35,6 +35,7 @@
     "foundation": "~5.5.3",
     "normalize-css": "normalize.css#~3.0.3",
     "Alegreya": "https://google-fonts.azurewebsites.net/googleFonts/Alegreya?family=Alegreya+Sans:400,800italic",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-mocks": "~1.4.8"
   }
 }

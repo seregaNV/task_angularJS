@@ -5,20 +5,19 @@
         <div class="list-group">
             <div class="list-group-item text-center">
                 <form>
-                    <input type="text" class="form-control" placeholder="Search..." ng-model="search">
+                    <input type="text" class="form-control" placeholder="Search..." ng-change="changeData()" ng-model="search">
                 </form>
             </div>
+            <br>
+            <input type="checkbox" ng-model="show" ng-change="changeData()"> Show only available in stock.
         </div>
-        <input type="checkbox" ng-model="show"> Show only available in stock.
-        <br>
-        <br>
         <p>Sort by:</p>
         <select class="form-control" ng-model="orderProp">
             <option value="name">Alphabetical</option>
             <option value="age">Newest</option>
         </select>
         <br>
-        <p>Quantity results: {{ phones.length }}</p>
+        <p>Quantity results: {{ quant }}</p>
     </div>
     <div class="col-xs-6 col-sm-8 catalog-right">
         <div class="jumbotron text-center user-select-none" id="jumbo-phonecat">
@@ -26,7 +25,8 @@
             <p>This is an example of an application written in AngularJs.</p>
         </div>
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-lg-4 item phone-listing" ng-repeat="phone in phones | filter:search | orderBy:orderProp" ng-if="phone.status || !show">
+            <div class="col-xs-12 col-sm-6 col-lg-4 item phone-listing" ng-repeat="phone in phones | orderBy:orderProp">
+            <!--<div class="col-xs-12 col-sm-6 col-lg-4 item phone-listing" ng-repeat="phone in phones | filter:search | orderBy:orderProp" ng-if="phone.status || !show">-->
                 <div class="preview-img text-center">
                     <a ui-sref="phones({ phoneId:phone.id })"><img ng-src="{{ phone.imageUrl }}" alt="{{ phone.name }}"/></a>
                         <span class="label"

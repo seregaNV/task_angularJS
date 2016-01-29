@@ -1,15 +1,26 @@
 (function() {
     'use strict';
-    function phoneListCtrl($scope, Phone) {
-        $scope.phones = Phone.query();
+    function phoneListCtrl($scope, PhoneFactory) {
+
+        //$scope.phones = PhoneFactory.query();
+        PhoneFactory.query({}, function(data) {
+            $scope.phones = data;
+            $scope.quant = $scope.phones.length;
+            $scope.changeData = function() {
+                var companys = [];
+                for (var i = 0; i < data.length; i++) {
+                    if ((((data[i].name.indexOf($scope.search)) != -1) || !$scope.search) && (data[i].status || !$scope.show)) {
+                        companys.push(data[i]);
+                    }
+                }
+                $scope.phones = companys;
+                $scope.quant = $scope.phones.length;
+            };
+        });
         $scope.orderProp = 'age';
-        //for (var key in $scope.phones.$promise) {
-        //    console.log(property);
-        //}
-        //console.log($scope.phones.$promise.$$state);
     }
-    function phoneDetailCtrl($scope, $stateParams, Phone) {
-        $scope.phone = Phone.get({phoneId: $stateParams.phoneId}, function(phone) {
+    function phoneDetailCtrl($scope, $stateParams, PhoneFactory) {
+        $scope.phone = PhoneFactory.get({phoneId: $stateParams.phoneId}, function(phone) {
             $scope.mainImageUrl = phone.images[0];
         });
 
@@ -18,6 +29,6 @@
         };
     }
     angular.module('phonecatApp')
-        .controller('PhoneListCtrl', ['$scope', 'Phone', phoneListCtrl])
-        .controller('PhoneDetailCtrl', ['$scope', '$stateParams', 'Phone', phoneDetailCtrl]);
+        .controller('PhoneListCtrl', ['$scope', 'PhoneFactory', phoneListCtrl])
+        .controller('PhoneDetailCtrl', ['$scope', '$stateParams', 'PhoneFactory', phoneDetailCtrl]);
 })();

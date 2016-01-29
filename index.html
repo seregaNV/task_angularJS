@@ -14,6 +14,10 @@
     <!--<link rel="stylesheet" href="bower_components/normalize-css/normalize.css">-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
+    <!--<style type="text/css">-->
+        <!--html, body { height: 100%; margin: 0; padding: 0; }-->
+        <!--#map { height: 100%; }-->
+    <!--</style>-->
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
@@ -32,7 +36,7 @@
                 <li><a ui-sref="phone-catalog">Phone catalog</a></li>
                 <li><a ui-sref="phone-book">Phonebook</a></li>
                 <li><a ui-sref="trello">Trello</a></li>
-                <li><a ui-sref="contact">Contact</a></li>
+                <li><a ui-sref="rozklad">Rozklad</a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tasks <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -57,6 +61,15 @@
         </div>
     </footer>
 </div>
+
+
+<!--<div id="map"></div>-->
+
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSq2iIy-IfMWsyVaJmZW2_sy2QwNOdb7I&">
+</script>
+
+<script src="js/googleMapAPI.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <!--<script src="bower_components/angular-route/angular-route.js"></script>-->
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
@@ -68,12 +81,14 @@
 <script src="js/controllers/tasksCtrl.js"></script>
 <script src="js/controllers/phoneCatCtrl.js"></script>
 <script src="js/controllers/phonebookCtrl.js"></script>
+<script src="js/controllers/rozkladCtrl.js"></script>
 <script src="js/factorys/trelloFactorys.js"></script>
 <script src="js/factorys/tasksFactory.js"></script>
 <script src="js/factorys/phoneCatFactory.js"></script>
 <script src="js/factorys/phonebookFactory.js"></script>
 <script src="js/directives/phonebookDir.js"></script>
 <script src="js/directives/trelloDir.js"></script>
+<script src="js/directives/rozkladDir.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/animations.js"></script>
 </body>
