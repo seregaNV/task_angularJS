@@ -10,14 +10,12 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="bower_components/Alegreya/alegreyaSans.css">
+    <link href='https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
     <!--<link rel="stylesheet" href="bower_components/foundation/css/foundation.css">-->
     <!--<link rel="stylesheet" href="bower_components/normalize-css/normalize.css">-->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/animations.css">
-    <!--<style type="text/css">-->
-        <!--html, body { height: 100%; margin: 0; padding: 0; }-->
-        <!--#map { height: 100%; }-->
-    <!--</style>-->
 </head>
 <body>
 <div class="navbar navbar-default navbar-fixed-top">
@@ -62,14 +60,6 @@
     </footer>
 </div>
 
-
-<!--<div id="map"></div>-->
-
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSq2iIy-IfMWsyVaJmZW2_sy2QwNOdb7I&">
-</script>
-
-<script src="js/googleMapAPI.js"></script>
 <script src="bower_components/angular/angular.js"></script>
 <!--<script src="bower_components/angular-route/angular-route.js"></script>-->
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
@@ -86,10 +76,14 @@
 <script src="js/factorys/tasksFactory.js"></script>
 <script src="js/factorys/phoneCatFactory.js"></script>
 <script src="js/factorys/phonebookFactory.js"></script>
+<script src="js/factorys/rozkladFactory.js"></script>
 <script src="js/directives/phonebookDir.js"></script>
 <script src="js/directives/trelloDir.js"></script>
 <script src="js/directives/rozkladDir.js"></script>
 <script src="js/filters.js"></script>
 <script src="js/animations.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDS-HTWFyOX7vQ15-9WZW34NCpfYivT4aQ&libraries=places"></script>
 </body>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSq2iIy-IfMWsyVaJmZW2_sy2QwNOdb7I&"></script>-->
 </html>

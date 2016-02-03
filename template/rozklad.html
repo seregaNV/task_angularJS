@@ -1,12 +1,63 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-3"></div>
-        <div class="col-xs-12 col-sm-8 col-md-9" ng-controller="RozkladCtrl">
-            <!--<div rozklad-dir>-->
-                <!--<div id="map"></div>-->
-            <!--</div>-->
+<div class="container" ng-controller="RozkladCtrl">
+    <div class="row rozklad-container">
+        <div class="col-xs-12 col-sm-4 col-md-3"  ng-switch on = "choiceView">
+
+            <div class="row rozklad-choice-menu-left">
+                <div class="col-xs-6 text-center" ng-click = "choiceView = 'list'" ng-class="{rozklad_choice_menu_left_active: choiceView == 'list'}">
+                    <i class="fa fa-4x fa-list rozklad-manu-icon"></i>
+                </div>
+                <div class="col-xs-6 text-center" ng-click = "choiceView = 'table'" ng-class="{rozklad_choice_menu_left_active: choiceView == 'table'}">
+                    <i class="fa fa-4x fa-th-large rozklad-manu-icon"></i>
+                </div>
+            </div>
+
+            <div class="rozklad-choice" ng-switch-when="list">
+                    <h3 class="text-center" ng-click="showTrams()">Трамвай</h3>
+                    <p ng-show="tramsShow" ng-repeat="tram in trams"><b>{{ tram.number }}.</b> {{ tram.name }}</p>
+                    <h3 class="text-center" ng-click="showTrolleybuses()">Тролейбус</h3>
+                    <p ng-show="trolleybusesShow" ng-repeat="trolleybus in trolleybuses"><b>{{ trolleybus.number }}.</b> {{ trolleybus.name }}</p>
+                    <h3 class="text-center" ng-click="showBuses()">Автобус</h3>
+                    <p ng-show="busesShow" ng-repeat="bus in buses"><b>{{ bus.number }}.</b> {{ bus.name }}</p>
+            </div>
+
+
+            <div class="text-center rozklad-choice" ng-switch-when="table">
+                <div id="rozklad-transport-img" class="row">
+                    <div ng-click="showTrams()" class="col-xs-4 rozklad-transport-img"><img src="/img/rozklad/tram.png" alt=""/></div>
+                    <div ng-click="showTrolleybuses()" class="col-xs-4 rozklad-transport-img"><img src="/img/rozklad/trolleybus.png" alt=""/></div>
+                    <div ng-click="showBuses()" class="col-xs-4 rozklad-transport-img"><img src="/img/rozklad/bus.png" alt=""/></div>
+                </div>
+                <div class="rozklad-choice-way">
+                        <div ng-show="tramsShow" class="col-xs-2 col-sm-4" ng-repeat="tram in trams">
+                            <p><span>{{ tram.number }}</span></p>
+                        </div>
+                        <div ng-show="trolleybusesShow" class="col-xs-2 col-sm-4" ng-repeat="trolleybus in trolleybuses">
+                            <p><span>{{ trolleybus.number }}</span></p>
+                        </div>
+                        <div ng-show="busesShow" class="col-xs-2 col-sm-4" ng-repeat="bus in buses">
+                            <p><span>{{ bus.number }}</span></p>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-9" ng-switch on = "choiceDetail">
+            <div class="row rozklad-choice-menu-right">
+                <div class="col-xs-6 text-center" ng-click = "choiceDetail = 'map'" ng-class="{rozklad_choice_menu_right_active: choiceDetail == 'map'}"><i class="fa fa-4x fa-globe rozklad-manu-icon"></i></div>
+                <div class="col-xs-6 text-center" ng-click = "choiceDetail = 'list'" ng-class="{rozklad_choice_menu_right_active: choiceDetail == 'list'}"><i class="fa fa-4x fa-list-alt rozklad-manu-icon"></i></div>
+            </div>
+            <div rozklad-dir
+                 centration-dir
+                 geo-dir
+                 get-position-dir
+                 travel-modes-dir
+                 search-box-dir
+                 travel-stations-dir
+                 ng-switch-when="map">
+                <div id="map"></div>
+            </div>
+            <div class="rozklad-choice-menu-right-list" ng-switch-when="list">text part</div>
         </div>
     </div>
 </div>
 
-<div id="map"></div>
+<!--<div id="map"></div>-->
