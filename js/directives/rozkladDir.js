@@ -254,6 +254,7 @@
         return {
             link: function (scope, element, attributes) {
                 scope.$on('isLoad', function(event, args) {
+                    console.log('isLoad');
                     //event.stopPropagation();
                     var color = 'red';
                     var direct = scope.stations;
@@ -281,7 +282,6 @@
                     });
                     flightPath.setMap(map);
                 });
-
             }
         }
     }

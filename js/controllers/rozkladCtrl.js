@@ -4,7 +4,7 @@
         $scope.choiceView = 'list';
         $scope.choiceDetail = 'map';
 
-        $scope.tramsShow = false;
+        $scope.tramsShow = true;
         $scope.trolleybusesShow = false;
         $scope.busesShow = false;
 
@@ -25,7 +25,6 @@
         };
 
         DirectionFactory.query({file: 'transports'}, function(data) {
-            //$scope.$emit('isLoad', {});
             $scope.data = data;
             $scope.trams = [];
             $scope.trolleybuses = [];
@@ -40,13 +39,12 @@
                 }
             }
         });
-        DirectionFactory.query({file: 'tr1'}, function(stations) {
+        DirectionFactory.query({file: 'tr'}, function(stations) {
             $scope.stations = stations;
-            //for (var i = 0; i < stations.length; i++) {
-            //
-            //    $scope.name = stations[i].name;
-            //}
             $scope.$broadcast('isLoad', {});
+            $scope.$watch('choiceDetail', function(oldValue, newValue) {
+                $scope.$broadcast('isLoad', {});
+            });
         });
     }
     angular.module('phonecatApp').controller('RozkladCtrl', ['$scope', 'DirectionFactory', rozkladCtrl]);

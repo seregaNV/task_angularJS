@@ -363,26 +363,38 @@ span.describe {
     word-wrap: break-word;
     margin: 10px;
     padding: 10px;
-    border: 3px solid #555;
+    /*border: 3px solid #555;*/
     border-radius: 30px;
 }
 .rozklad-choice h3:hover {
     cursor: pointer;
+    background-color: #05a1b5;
+    color: #bff0ff;
+    /*border: 3px solid #555;*/
+}
+.rozklad_choice_noActive {
+    background-color: lightskyblue;
+    /*border: 3px solid blue;*/
+}
+.rozklad_choice_active {
     background-color: deepskyblue;
-    color: blue;
-    border: 3px solid blue;
 }
 
-.rozklad-choice p {
+.rozklad_choice_content {
+    max-height: 310px;
+    overflow-y: auto;
+}
+
+.rozklad_choice_content p {
     font-size: 12px;
     color: #555;
     word-wrap: break-word;
     margin: 10px 20px;
     padding: 0;
 }
-.rozklad-choice p:hover {
+.rozklad_choice_content p:hover {
     cursor: pointer;
-    color: #333;
+    color: #000;
 }
 
 
@@ -401,16 +413,19 @@ span.describe {
 }
 .rozklad-transport-img:hover{
     cursor: pointer;
-    background-color: dodgerblue;
+    background-color: #05a1b5;
     border-radius: 40px;
-    color: lightskyblue;
+    /*color: lightskyblue;*/
 }
 .rozklad-transport-img img{
     /*opacity: 0.7;*/
     height: 100%;
     width: 100%;
 }
-
+.rozklad_transport_img_active {
+    background-color: deepskyblue;
+    border-radius: 40px;
+}
 
 /*left menu table*/
 
@@ -421,7 +436,7 @@ span.describe {
 }
 .rozklad-choice-way div{
     padding: 0;
-    margin: 5px 0;
+    margin: 6px 0;
     /*height: 90px;*/
     /*width: 90px;*/
 }
@@ -435,13 +450,19 @@ span.describe {
     margin: auto;
     /*margin-top: 20px;*/
     padding: 0;
-    background-color: #abdffa;
-    border: 2px solid #555;
+    background-color: lightskyblue;
+    border: 2px solid lightskyblue;
     border-radius: 5px;
 }
 .rozklad-choice-way div p span{
     display: block;
     margin-top: 11px;
+}
+.rozklad-choice-way div p:hover{
+    background-color: #05c7dd;
+    border: 2px solid #05c7dd;
+    color: #bff0ff;
+    cursor: pointer;
 }
 
 /*.rozklad-choice-table h3 {*/
