@@ -34,8 +34,7 @@
             })
             .state('rozklad', {
                 url: '/rozklad',
-                templateUrl: 'template/rozklad.html',
-                controller: 'RozkladCtrl'
+                templateUrl: 'template/rozklad.html'
             })
     }
     angular.module('phonecatApp').config(['$stateProvider', '$urlRouterProvider', mainRoute]);

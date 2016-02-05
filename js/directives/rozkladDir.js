@@ -153,26 +153,26 @@
         return {
             link: function (scope, element, attributes) {
 
-                scope.$on('mapIsLoad', function(event, args) {
-                    //event.stopPropagation();
-                    var directionsDisplay = new google.maps.DirectionsRenderer;
-                    var directionsService = new google.maps.DirectionsService;
-                    directionsDisplay.setMap(map);
-                    calculateAndDisplayRoute(directionsService, directionsDisplay);
-                    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-                        directionsService.route({
-                            origin: {lat: 49.2228688, lng: 28.456587499999998},
-                            destination: {lat: 49.23842033794661, lng: 28.408777713775635   },
-                            travelMode: google.maps.TravelMode['DRIVING']
-                        }, function(response, status) {
-                            if (status == google.maps.DirectionsStatus.OK) {
-                                directionsDisplay.setDirections(response);
-                            } else {
-                                window.alert('Directions request failed due to ' + status);
-                            }
-                        });
-                    }
-                });
+                //scope.$on('mapIsLoad', function(event, args) {
+                //    //event.stopPropagation();
+                //    var directionsDisplay = new google.maps.DirectionsRenderer;
+                //    var directionsService = new google.maps.DirectionsService;
+                //    directionsDisplay.setMap(map);
+                //    calculateAndDisplayRoute(directionsService, directionsDisplay);
+                //    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                //        directionsService.route({
+                //            origin: {lat: 49.2228688, lng: 28.456587499999998},
+                //            destination: {lat: 49.23842033794661, lng: 28.408777713775635   },
+                //            travelMode: google.maps.TravelMode['DRIVING']
+                //        }, function(response, status) {
+                //            if (status == google.maps.DirectionsStatus.OK) {
+                //                directionsDisplay.setDirections(response);
+                //            } else {
+                //                window.alert('Directions request failed due to ' + status);
+                //            }
+                //        });
+                //    }
+                //});
             }
         }
     }
@@ -196,15 +196,11 @@
                     var searchBox = new google.maps.places.SearchBox(input);
                     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(input);
 
-                    // Bias the SearchBox results towards current map's viewport.
                     map.addListener('bounds_changed', function() {
                         searchBox.setBounds(map.getBounds());
                     });
 
                     var markers = [];
-                    // [START region_getplaces]
-                    // Listen for the event fired when the user selects a prediction and retrieve
-                    // more details for that place.
                     searchBox.addListener('places_changed', function() {
                         var places = searchBox.getPlaces();
 
@@ -212,13 +208,11 @@
                             return;
                         }
 
-                        // Clear out the old markers.
                         markers.forEach(function(marker) {
                             marker.setMap(null);
                         });
                         markers = [];
 
-                        // For each place, get the icon, name and location.
                         var bounds = new google.maps.LatLngBounds();
                         places.forEach(function(place) {
                             var icon = {
@@ -253,11 +247,12 @@
     function travelStationsDir() {
         return {
             link: function (scope, element, attributes) {
+                //console.log('travelStationsDir - ', scope);
                 scope.$on('isLoad', function(event, args) {
                     console.log('isLoad');
                     //event.stopPropagation();
                     var color = 'red';
-                    var direct = scope.stations;
+                    var direct = args.stations;
                     var pathCoordinates = [];
                     var marker;
                     for (var i = 0; i < direct.length; i++) {
