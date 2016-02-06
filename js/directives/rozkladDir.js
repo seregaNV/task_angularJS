@@ -247,17 +247,23 @@
     function travelStationsDir() {
         return {
             link: function (scope, element, attributes) {
-                //console.log('travelStationsDir - ', scope);
+                var markers = [];
+                var flightPath;
                 scope.$on('isLoad', function(event, args) {
-                    console.log('isLoad');
-                    //event.stopPropagation();
+                    //console.log('isLoad');
                     var color = 'red';
                     var direct = args.stations;
                     var pathCoordinates = [];
-                    var marker;
+                    if (markers && flightPath) {
+                        for (var i = 0; i < markers.length; i++) {
+                            markers[i].setMap(null);
+                        }
+                        markers = [];
+                        flightPath.setMap(null);
+                    }
                     for (var i = 0; i < direct.length; i++) {
                         var pos = {lat: direct[i].lat, lng: direct[i].lng};
-                        marker = new google.maps.Marker({
+                        var marker = new google.maps.Marker({
                             position: pos,
                             icon: {
                                 path: google.maps.SymbolPath.CIRCLE,
@@ -266,9 +272,11 @@
                             },
                             map: map
                         });
-                        pathCoordinates.push(pos)
+                        markers.push(marker);
+                        pathCoordinates.push(pos);
+
                     }
-                    var flightPath = new google.maps.Polyline({
+                    flightPath = new google.maps.Polyline({
                         path: pathCoordinates,
                         geodesic: true,
                         strokeColor: color,
