@@ -250,7 +250,7 @@
                 var markers = [];
                 var flightPath;
                 scope.$on('isLoad', function(event, args) {
-                    //console.log('isLoad');
+                    console.log('isLoad');
                     var color = 'red';
                     var direct = args.stations;
                     var pathCoordinates = [];
@@ -281,10 +281,12 @@
                         geodesic: true,
                         strokeColor: color,
                         strokeOpacity: 1.0,
-                        strokeWeight: 2
+                        strokeWeight: 5
                     });
                     flightPath.setMap(map);
                 });
+                //listen();
+                //scope.$on('$destroy', listen);
             }
         }
     }

@@ -1,9 +1,8 @@
 <div class="container" ng-controller="RozkladCtrl">
-    {{ choiceDetail }}
     <div class="row rozklad-container">
-        <div class="col-xs-12 col-sm-4 col-md-3"
-             ng-switch on = "choiceView"
-             ng-controller="RozkladGetTransportsCtrl">
+        <div ng-controller="RozkladGetTransportsCtrl"
+             class="col-xs-12 col-sm-4 col-md-3"
+             ng-switch on = "choiceView">
 
             <div class="row rozklad-choice-menu-left">
                 <div class="col-xs-6 text-center"
@@ -24,7 +23,7 @@
                     ng-class=" tramsShow ? 'rozklad_choice_active' : 'rozklad_choice_noActive' ">
                     Трамвай
                 </h3>
-                <div ng-class="{rozklad_choice_content: tramsShow}" ng-controller="RozkladGetRouteCtrl">
+                <div ng-class="{rozklad_choice_content: tramsShow}">
                     <p ng-show="tramsShow"
                        ng-repeat="tram in trams"
                        ng-click="route(tram.file)">
@@ -36,7 +35,7 @@
                     ng-class=" trolleybusesShow ? 'rozklad_choice_active' : 'rozklad_choice_noActive' ">
                     Тролейбус
                 </h3>
-                <div ng-class="{rozklad_choice_content: trolleybusesShow}" ng-controller="RozkladGetRouteCtrl">
+                <div ng-class="{rozklad_choice_content: trolleybusesShow}">
                     <p ng-show="trolleybusesShow"
                        ng-repeat="trolleybus in trolleybuses"
                        ng-click="route(trolleybus.file)">
@@ -48,7 +47,7 @@
                     ng-class=" busesShow ? 'rozklad_choice_active' : 'rozklad_choice_noActive' ">
                     Автобус
                 </h3>
-                <div ng-class="{rozklad_choice_content: busesShow}" ng-controller="RozkladGetRouteCtrl">
+                <div ng-class="{rozklad_choice_content: busesShow}">
                     <p ng-show="busesShow"
                        ng-repeat="bus in buses"
                        ng-click="route(bus.file)">
@@ -77,22 +76,19 @@
                     </div>
                 </div>
                 <div class="rozklad-choice-way">
-                    <div  ng-controller="RozkladGetRouteCtrl"
-                          ng-show="tramsShow"
+                    <div  ng-show="tramsShow"
                           class="col-xs-2 col-sm-4"
                           ng-repeat="tram in trams"
                           ng-click="route(tram.file)">
                         <p><span>{{ tram.number }}</span></p>
                     </div>
-                    <div  ng-controller="RozkladGetRouteCtrl"
-                          ng-show="trolleybusesShow"
+                    <div  ng-show="trolleybusesShow"
                           class="col-xs-2 col-sm-4"
                           ng-repeat="trolleybus in trolleybuses"
                           ng-click="route(trolleybus.file)">
                         <p><span>{{ trolleybus.number }}</span></p>
                     </div>
-                    <div  ng-controller="RozkladGetRouteCtrl"
-                          ng-show="busesShow"
+                    <div  ng-show="busesShow"
                           class="col-xs-2 col-sm-4"
                           ng-repeat="bus in buses"
                           ng-click="route(bus.file)">
@@ -101,20 +97,22 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-8 col-md-9"
-             ng-controller="RozkladGetStopsCtrl"
-             ng-switch on = "$parent.choiceDetail">
+        <div  class="col-xs-12 col-sm-8 col-md-9"
+              ng-switch on = "choiceDetail">
             <div class="row rozklad-choice-menu-right">
                 <div class="col-xs-6 text-center"
-                     ng-click = "$parent.choiceDetail = 'map'"
-                     ng-class="{rozklad_choice_menu_right_active: $parent.choiceDetail == 'map'}">
-                    <i class="fa fa-4x fa-globe rozklad-manu-icon"></i>
-                </div>
-                <div class="col-xs-6 text-center"
-                     ng-click = "$parent.choiceDetail = 'list'"
-                     ng-class="{rozklad_choice_menu_right_active: $parent.choiceDetail == 'list'}">
+                     ng-click = "choiceDetail = 'list'"
+                     ng-class="{rozklad_choice_menu_right_active: choiceDetail == 'list'}">
                     <i class="fa fa-4x fa-list-alt rozklad-manu-icon"></i>
                 </div>
+                <div class="col-xs-6 text-center"
+                     ng-click = "choiceDetail = 'map'"
+                     ng-class="{rozklad_choice_menu_right_active: choiceDetail == 'map'}">
+                    <i class="fa fa-4x fa-globe rozklad-manu-icon"></i>
+                </div>
+            </div>
+            <div class="rozklad-choice-menu-right-list" ng-switch-when="list">
+                <p ng-repeat="station in stations">{{ station.name }}</p>
             </div>
             <div rozklad-dir
                  centration-dir
@@ -125,9 +123,6 @@
                  travel-stations-dir
                  ng-switch-when="map">
                 <div id="map"></div>
-            </div>
-            <div class="rozklad-choice-menu-right-list" ng-switch-when="list">
-                <p ng-repeat="station in stations">{{ station.name }}</p>
             </div>
         </div>
     </div>
