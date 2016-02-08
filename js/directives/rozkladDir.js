@@ -249,8 +249,9 @@
             link: function (scope, element, attributes) {
                 var markers = [];
                 var flightPath;
-                scope.$on('isLoad', function(event, args) {
-                    console.log('isLoad');
+                scope.$on('isLoadToDir', function(event, args) {
+                    console.log('isLoadToDir');
+                    console.log('scope.id', scope.$id);
                     var color = 'red';
                     var direct = args.stations;
                     var pathCoordinates = [];
@@ -284,9 +285,9 @@
                         strokeWeight: 5
                     });
                     flightPath.setMap(map);
+                    //listen();
+                    //scope.$on('$destroy', listen);
                 });
-                //listen();
-                //scope.$on('$destroy', listen);
             }
         }
     }

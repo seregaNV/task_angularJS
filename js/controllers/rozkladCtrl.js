@@ -69,48 +69,68 @@
 
         $scope.choiceDetail = 'list';
 
-        $scope.route = function(query) {
-            console.log(query);
-            var urlQuery = 'http://localhost:3001/' + query;
-            $http.get(urlQuery)
-                .success(function(data) {
-                    $scope.stations = data;
-                    //$scope.$broadcast('isLoad', {stations: data});
-                    $scope.$watch('choiceDetail', function(newValue, oldValue) {
-                        if (newValue === 'map') {
-                            $scope.$broadcast('isLoad', {stations: data});
-                        }
+        $scope.getRoute = function(query) {
+            $scope.route = query;
+            var urlQuery = 'http://localhost:3001/' + query.file;
+            if ($scope.routeCheck == query.file) {
+                console.log('Data already loaded.');
+            } else {
+                console.log('Loading.');
+                $http.get(urlQuery)
+                    .success(function(data) {
+                        $scope.$watch('choiceDetail', function(newValue, oldValue) {
+                            if (newValue === 'map') {
+                                $scope.$broadcast('isLoadToDir', {stations: data});
+                            } else if (newValue === 'list') {
+                                $scope.$broadcast('isLoadToCtr', {stations: data});
+                            }
+                        });
+                        //$scope.routeName = data.name;
+                        //$scope.routeNumber = data.number;
+                    })
+                    .error(function(error) {
+                        console.error('error: ', error);
                     });
-                })
-                .error(function(error) {
-                    console.error('error: ', error);
-                });
+            }
+            $scope.routeCheck = query.file;
         };
 
     }
     function rozkladGetTransportsCtrl($scope, $http) {
-
         $scope.choiceView = 'list';
 
         $scope.tramsShow = true;
         $scope.trolleybusesShow = false;
         $scope.busesShow = false;
 
-        $scope.showTrams = function () {
-            $scope.tramsShow = !$scope.tramsShow;
-            $scope.trolleybusesShow = false;
-            $scope.busesShow = false;
+        $scope.showTransports = function (transport) {
+            switch (transport) {
+                case 'tram':
+                    $scope.tramsShow = !$scope.tramsShow;
+                    $scope.trolleybusesShow = false;
+                    $scope.busesShow = false;
+                    break;
+                case 'trolleybus':
+                    $scope.tramsShow = false;
+                    $scope.trolleybusesShow = !$scope.trolleybusesShow;
+                    $scope.busesShow = false;
+                    break;
+                case 'bus':
+                    $scope.tramsShow = false;
+                    $scope.trolleybusesShow = false;
+                    $scope.busesShow = !$scope.busesShow;
+                    break;
+                default:
+                    console.error(transport + ' is not find.');
+            }
         };
-        $scope.showTrolleybuses = function () {
-            $scope.tramsShow = false;
-            $scope.trolleybusesShow = !$scope.trolleybusesShow;
-            $scope.busesShow = false;
-        };
-        $scope.showBuses = function () {
-            $scope.tramsShow = false;
-            $scope.trolleybusesShow = false;
-            $scope.busesShow = !$scope.busesShow;
-        };
+        //$scope.showTrams = function () {
+        //};
+        //$scope.showTrolleybuses = function () {
+        //};
+        //$scope.showBuses = function () {
+        //};
+
         $scope.trams = [];
         $scope.trolleybuses = [];
         $scope.buses = [];
@@ -120,6 +140,7 @@
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].type == 'tram') {
                         $scope.trams.push(data[i]);
+                        //console.log($scope.trams[i].number);
                     } else if (data[i].type == 'trolleybus') {
                         $scope.trolleybuses.push(data[i]);
                     } else if (data[i].type == 'bus') {
@@ -130,6 +151,10 @@
             .error(function(err) {
                 console.error('error: ', err);
             });
+        $scope.$on('isLoadToCtr', function(event, args) {
+            $scope.checkNumber = $scope.route.number;
+            $scope.checkType = $scope.route.type;
+        });
     }
     //function rozkladGetRouteCtrl($scope, $http, $rootScope) {
     //    $scope.route = function(query) {
@@ -157,10 +182,27 @@
     //        }
     //    });
     //}
+    function rozkladStationsCtrl($scope) {
+        $scope.$on('isLoadToCtr', function(event, args) {
+            $scope.stations = args.stations;
+            $scope.routeName = $scope.route.name;
+            $scope.routeNumber = $scope.route.number;
+            console.log($scope.stations)
+            var start = 0;
+
+            //console.log('isLoadToCtr');
+            //console.log($scope.$parent);
+            //console.log($scope.$parent.$parent);
+        });
+        //$scope.$on('$destroy', function() {
+            //listen();
+        //});
+    }
     angular.module('phonecatApp')
         .controller('RozkladCtrl', ['$scope', '$http', '$rootScope', rozkladCtrl])
         .controller('RozkladGetTransportsCtrl', ['$scope', '$http', rozkladGetTransportsCtrl])
+        .controller('RozkladStationsCtrl', ['$scope', rozkladStationsCtrl])
         //.controller('RozkladGetRouteCtrl', ['$scope', '$http', '$rootScope', rozkladGetRouteCtrl])
         //.controller('RozkladGetStopsCtrl', ['$scope', '$rootScope', rozkladGetStopsCtrl])
-    //angular.module('phonecatApp').controller('RozkladCtrl', ['$scope', 'DirectionFactory', rozkladCtrl]);
+        //angular.module('phonecatApp').controller('RozkladCtrl', ['$scope', 'DirectionFactory', rozkladCtrl]);
 })();

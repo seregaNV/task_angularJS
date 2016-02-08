@@ -339,7 +339,7 @@ span.describe {
     color: lightpink;
 }
 .rozklad-choice-menu-right-list {
-    background-color: #e1bee7 ;
+    background-color: #f6ffaf;
     height: 500px;
 }
 .rozklad_choice_menu_right_active {
@@ -385,16 +385,24 @@ span.describe {
     overflow-y: auto;
 }
 
-.rozklad_choice_content p {
+.rozklad_choice_content div {
     font-size: 12px;
+    font-weight: 600;
     color: #555;
     word-wrap: break-word;
-    margin: 10px 20px;
+    margin: 5px 10px;
     padding: 0;
 }
-.rozklad_choice_content p:hover {
+.rozklad_choice_content div:hover {
     cursor: pointer;
     color: #000;
+}
+.rozklad_choice_content div p{
+    margin: 5px 10px;
+}
+.rozklad_choice_content_active {
+    background-color: #c0f0ff;
+    border-radius: 3px;
 }
 
 
@@ -463,6 +471,9 @@ span.describe {
     border: 2px solid #05c7dd;
     color: #bff0ff;
     cursor: pointer;
+}
+.rozklad_choice_way_active {
+
 }
 
 /*.rozklad-choice-table h3 {*/
