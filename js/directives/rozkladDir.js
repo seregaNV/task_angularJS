@@ -36,11 +36,11 @@
 
                 var controlIcon = angular.element('<i>');
                 var controlUI = angular.element('<div>');
-                controlIcon.addClass('fa fa-crosshairs fa-2x rozklad-Icon');
+                controlIcon.addClass('fa fa-crosshairs fa-2x rozklad_Icon');
                 controlUI
                     .attr({title: 'Click to recenter the map'})
                     .attr({id: 'rozklad-controlUI'})
-                    .addClass('rozklad-UI')
+                    .addClass('rozklad_UI')
                     .append(controlIcon);
                 element.find('#map').append(controlUI);
                 controlUI.on('click', function() {
@@ -61,11 +61,11 @@
                 var marker;
                 var geoIcon = angular.element('<i>');
                 var geoUI = angular.element('<div>');
-                geoIcon.addClass('fa fa-street-view fa-2x rozklad-Icon');
+                geoIcon.addClass('fa fa-street-view fa-2x rozklad_Icon');
                 geoUI
                     .attr({title: 'Click to find your location'})
                     .attr({id: 'rozklad-geoUI'})
-                    .addClass('rozklad-UI')
+                    .addClass('rozklad_UI')
                     .append(geoIcon);
 
                 element.find('#map').append(geoUI);
@@ -184,7 +184,7 @@
                 var inputElement = angular.element('<input>');
                 element.append(inputElement);
                 inputElement.attr({id: 'rozklad-sb-input'})
-                    .addClass('rozklad-sb-controls')
+                    .addClass('rozklad_sb_controls')
                     .attr({type: 'text'})
                     .attr({placeholder: 'Search Box'});
 

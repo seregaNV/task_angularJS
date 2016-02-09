@@ -2,46 +2,6 @@
     'use strict';
     function rozkladCtrl($scope, $http, $rootScope) {
     //function rozkladCtrl($scope, DirectionFactory) {
-    //    $scope.choiceView = 'list';
-    //    $scope.choiceDetail = 'map';
-        //$scope.route = function(query) {
-        //    var urlQuery = 'http://localhost:3001/' + query;
-        //    console.log(query);
-        //    //$scope.query = query;
-        //    $http.get(urlQuery)
-        //        .success(function(data) {
-        //            //console.log(stations);
-        //            $scope.stations = data;
-        //            $scope.$broadcast('isLoad', {});
-        //            $scope.$watch('choiceDetail', function(oldValue, newValue) {
-        //                $scope.$broadcast('isLoad', {});
-        //            });
-        //        })
-        //        .error(function(err) {
-        //            console.error('error: ', err);
-        //        });
-        //};
-        //$http.get('http://localhost:3001/transports')
-        //    .success(function(data) {
-        //        //console.log(data);
-        //        $scope.data = data;
-        //        $scope.trams = [];
-        //        $scope.trolleybuses = [];
-        //        $scope.buses = [];
-        //        for (var i = 0; i < data.length; i++) {
-        //            if (data[i].type == 'tram') {
-        //                $scope.trams.push(data[i]);
-        //            } else if (data[i].type == 'trolleybus') {
-        //                $scope.trolleybuses.push(data[i]);
-        //            } else if (data[i].type == 'bus') {
-        //                $scope.buses.push(data[i]);
-        //            }
-        //        }
-        //    })
-        //    .error(function(err) {
-        //        console.error('error: ', err);
-        //    });
-
 
         //DirectionFactory.query({file: 'transports'}, function(data) {
         //    $scope.data = data;
@@ -124,12 +84,6 @@
                     console.error(transport + ' is not find.');
             }
         };
-        //$scope.showTrams = function () {
-        //};
-        //$scope.showTrolleybuses = function () {
-        //};
-        //$scope.showBuses = function () {
-        //};
 
         $scope.trams = [];
         $scope.trolleybuses = [];
@@ -184,19 +138,40 @@
     //}
     function rozkladStationsCtrl($scope) {
         $scope.$on('isLoadToCtr', function(event, args) {
-            $scope.stations = args.stations;
+            var data = args.stations;
             $scope.routeName = $scope.route.name;
             $scope.routeNumber = $scope.route.number;
-            console.log($scope.stations)
-            var start = 0;
+            $scope.checkType = $scope.route.type;
+            $scope.start = 0;
+            $scope.addRoutList = function(index) {
+                var time = 0;
+                var stations = [];
+                for (var i = 0; i < data.length; i++) {
+                    var station = {};
+                    if (index < i){
+                        time += data[i].toStation;
+                        station.toStation = time + "'";
+                    } else if (index > i) {
+                        station.toStation = '';
+                    } else if (index == i) {
+                        station.toStation = 0;
+                        setDepot(data[i]);
+                    }
+                    station.name = data[i].name;
+                    stations.push(station);
+                }
+                $scope.stations = stations;
 
-            //console.log('isLoadToCtr');
-            //console.log($scope.$parent);
-            //console.log($scope.$parent.$parent);
+            };
+            $scope.addRoutList(0);
         });
         //$scope.$on('$destroy', function() {
-            //listen();
+        //listen();
         //});
+        var setDepot = function(data) {
+            $scope.weekdays = data.weekdays;
+            $scope.weekend = data.weekend;
+        };
     }
     angular.module('phonecatApp')
         .controller('RozkladCtrl', ['$scope', '$http', '$rootScope', rozkladCtrl])

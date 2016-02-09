@@ -1,23 +1,23 @@
 <div class="container" ng-controller="RozkladCtrl">
-    <div class="row rozklad-container">
+    <div class="row rozklad_container">
         <div ng-controller="RozkladGetTransportsCtrl"
              class="col-xs-12 col-sm-4 col-md-3"
              ng-switch on = "choiceView">
 
-            <div class="row rozklad-choice-menu-left">
+            <div class="row rozklad_choice_menu_left">
                 <div class="col-xs-6 text-center"
                      ng-click = "choiceView = 'list'"
                      ng-class="{rozklad_choice_menu_left_active: choiceView == 'list'}">
-                    <i class="fa fa-4x fa-list rozklad-manu-icon"></i>
+                    <i class="fa fa-4x fa-list rozklad_manu_icon"></i>
                 </div>
                 <div class="col-xs-6 text-center"
                      ng-click = "choiceView = 'table'"
                      ng-class="{rozklad_choice_menu_left_active: choiceView == 'table'}">
-                    <i class="fa fa-4x fa-th-large rozklad-manu-icon"></i>
+                    <i class="fa fa-4x fa-th-large rozklad_manu_icon"></i>
                 </div>
             </div>
 
-            <div class="rozklad-choice" ng-switch-when="list">
+            <div class="rozklad_choice" ng-switch-when="list">
                 <h3 class="text-center"
                     ng-click="showTransports('tram')"
                     ng-class=" tramsShow ? 'rozklad_choice_active' : 'rozklad_choice_noActive' ">
@@ -60,75 +60,139 @@
             </div>
 
 
-            <div class="text-center rozklad-choice" ng-switch-when="table">
-                <div id="rozklad-transport-img" class="row">
+            <div class="text-center rozklad_choice" ng-switch-when="table">
+                <div id="rozklad_transport_img" class="row">
                     <div ng-click="showTransports('tram')"
-                         class="col-xs-4 rozklad-transport-img"
+                         class="col-xs-4 rozklad_transport_img"
                          ng-class="{rozklad_transport_img_active: tramsShow}">
                         <img src="/img/rozklad/tram.png" alt=""/>
                     </div>
                     <div ng-click="showTransports('trolleybus')"
-                         class="col-xs-4 rozklad-transport-img"
+                         class="col-xs-4 rozklad_transport_img"
                          ng-class="{rozklad_transport_img_active: trolleybusesShow}">
                         <img src="/img/rozklad/trolleybus.png" alt=""/>
                     </div>
                     <div ng-click="showTransports('bus')"
-                         class="col-xs-4 rozklad-transport-img"
+                         class="col-xs-4 rozklad_transport_img"
                          ng-class="{rozklad_transport_img_active: busesShow}">
                         <img src="/img/rozklad/bus.png" alt=""/>
                     </div>
                 </div>
-                <div class="rozklad-choice-way">
+                <div class="rozklad_choice_way">
                     <div  ng-show="tramsShow"
                           class="col-xs-2 col-sm-4"
                           ng-repeat="tram in trams"
-                          ng-click="getRoute(tram)"
-                          ng-class="{rozklad_choice_way_active: (checkNumber == tram.number) && (checkType == 'tram')}">
-                        <p><span>{{ tram.number }}</span></p>
+                          ng-click="getRoute(tram)">
+                        <div class="rozklad_choice_way_element"
+                             ng-class="{rozklad_choice_way_active: (checkNumber == tram.number) && (checkType == 'tram')}">
+                            <div><p>{{ tram.number }}</p></div>
+                        </div>
                     </div>
                     <div  ng-show="trolleybusesShow"
                           class="col-xs-2 col-sm-4"
                           ng-repeat="trolleybus in trolleybuses"
                           ng-click="getRoute(trolleybus)">
-                        <p><span>{{ trolleybus.number }}</span></p>
+                        <div class="rozklad_choice_way_element"
+                             ng-class="{rozklad_choice_way_active: (checkNumber == trolleybus.number) && (checkType == 'trolleybus')}">
+                            <div><p>{{ trolleybus.number }}</p></div>
+                        </div>
                     </div>
-                    <div  ng-show="busesShow"
+                    <div ng-show="busesShow"
                           class="col-xs-2 col-sm-4"
                           ng-repeat="bus in buses"
                           ng-click="getRoute(bus)">
-                        <p><span>{{ bus.number }}</span></p>
+                        <div class="rozklad_choice_way_element"
+                             ng-class="{rozklad_choice_way_active: (checkNumber == bus.number) && (checkType == 'bus')}">
+                            <div><p>{{ bus.number }}</p></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div  class="col-xs-12 col-sm-8 col-md-9"
               ng-switch on = "choiceDetail">
-            <div class="row rozklad-choice-menu-right">
+            <div class="row rozklad_choice_menu_right">
                 <div class="col-xs-6 text-center"
                      ng-click = "choiceDetail = 'list'"
                      ng-class="{rozklad_choice_menu_right_active: choiceDetail == 'list'}">
-                    <i class="fa fa-4x fa-list-alt rozklad-manu-icon"></i>
+                    <i class="fa fa-4x fa-list-alt rozklad_manu_icon"></i>
                 </div>
                 <div class="col-xs-6 text-center"
                      ng-click = "choiceDetail = 'map'"
                      ng-class="{rozklad_choice_menu_right_active: choiceDetail == 'map'}">
-                    <i class="fa fa-4x fa-globe rozklad-manu-icon"></i>
+                    <i class="fa fa-4x fa-globe rozklad_manu_icon"></i>
                 </div>
             </div>
             <div ng-controller="RozkladStationsCtrl"
-                 class="rozklad-choice-menu-right-list"
+                 class="rozklad_choice_menu_right_list"
                  ng-switch-when="list">
-                <div class="row">
-                    <div class="col-xs-2"><h3>№{{ routeNumber }}</h3></div>
-                    <div class="col-xs-8"><h3>{{ routeName }}</h3></div>
-                    <div class="col-xs-2"><i class="fa fa-2x fa-list-alt rozklad-manu-icon"></i></div>
+                <div class="row rozklad_tour_description_head">
+                    <div class="col-xs-1 rozklad_tour_description_img">
+                        <div ng-show="checkType == 'tram'">
+                            <img src="/img/rozklad/tram.png" alt=""/>
+                        </div>
+                        <div ng-show="checkType == 'trolleybus'">
+                            <img src="/img/rozklad/trolleybus.png" alt=""/>
+                        </div>
+                        <div ng-show="checkType == 'bus'">
+                            <img src="/img/rozklad/bus.png" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-xs-9"><h3>№{{ routeNumber }}.  {{ routeName }}.</h3></div>
+                    <div class="col-xs-2 rozklad_tour_description_icon">
+                        <i class="fa fa-2x fa-random rozklad_manu_icon"></i>
+                    </div>
                 </div>
-                <table class="rozklad_station_table">
-                    <tr ng-repeat="station in stations">
-                        <td>{{ station.toStation }}'</td>
-                        <td>{{ station.name }}</td>
-                    </tr>
-                </table>
+                <div ng-switch on = "choiceDescription">
+                    <div>
+                        <button ng-click="choiceDescription = 'list'">list</button>
+                        <button ng-click="choiceDescription = 'description'">description</button>
+                    </div>
+                    <div class="rozklad_route_description_content"
+                         ng-switch-when="list">
+                        <dl class="dl-horizontal rozklad_station_table"
+                            ng-repeat="station in stations"
+                            ng-class="{rozklad_station_table_active: station.toStation === 0}">
+                            <dt>
+                                <span ng-show="station.toStation != 0">{{ station.toStation }}</span>
+                                <span ng-show="station.toStation === 0"><i class="fa fa-map-marker"></i></span>
+                            </dt>
+                            <dd ng-click="addRoutList($index)">{{ station.name }}</dd>
+                        </dl>
+                    </div>
+                    <div ng-switch-when="description">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <dl class="dl-horizontal rozklad_station_table" ng-repeat="(hours, minutes) in weekdays">
+                                    <dt>
+                                        <span>{{ hours }}</span>
+                                    </dt>
+                                    <dd>
+                                        <span ng-repeat="minute in minutes.timetable"
+                                              ng-class="{qqq: minute.timetable == minute.depot}">
+                                            {{ minute }}
+                                        </span>
+
+
+                                        <!--<span ng-repeat="(traffic, minutes) in traffics"-->
+                                              <!--ng-class="{qqq: minute.timetable == minute.depot}">-->
+                                            <!--{{ minute.timetable }}-->
+                                        <!--</span>-->
+
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <dl class="dl-horizontal rozklad_station_table" ng-repeat="(hours, minutes) in weekend">
+                                    <dt>
+                                        <span>{{ hours }}</span>
+                                    </dt>
+                                    <dd><span ng-repeat="minute in minutes.timetable">{{ minute }}</span></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div rozklad-dir
                  centration-dir

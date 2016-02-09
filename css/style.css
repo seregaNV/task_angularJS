@@ -248,25 +248,22 @@ span.describe {
 
 #map { height: 500px; }
 
-.rozklad-UI {
+.rozklad_UI {
     position: absolute;
     background-color: #fff;
-    /*border: 2px solid #fff;*/
     border-radius: 2px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     margin-right: 10px;
     right: 0;
-    /*text-align: center;*/
-    /*width: 100px;*/
     z-index: 999;
 }
-.rozklad-Icon {
+.rozklad_Icon {
     color: #777;
     margin-top: 2px;
     padding: 0 3px;
 }
-.rozklad-Icon:hover {
+.rozklad_Icon:hover {
     color: #444;
 }
 #rozklad-controlUI {
@@ -276,9 +273,9 @@ span.describe {
     margin-top: 96px;
 }
 
-/*SearchBox*/
+/*SearchBox------------------------------------------------*/
 
-.rozklad-sb-controls {
+.rozklad_sb_controls {
     border: 1px solid transparent;
     border-radius: 2px;
     margin: 10px 10px 0 0;
@@ -296,24 +293,23 @@ span.describe {
     width: 300px;
 }
 
-
-.rozklad-container {
+.rozklad_container {
     height: 580px;
 }
-.rozklad-container>div {
+.rozklad_container>div {
     padding: 0;
     height: 100%;
 }
-.rozklad-choice-menu-left {
+.rozklad_choice_menu_left {
     background-color: lightgreen;
     height: 80px;
     color: #555;
     margin: 0;
 }
-.rozklad-choice-menu-left div{
+.rozklad_choice_menu_left div{
     height: 100%;
 }
-.rozklad-choice-menu-left div:hover{
+.rozklad_choice_menu_left div:hover{
     background-color: limegreen;
     cursor: pointer;
     color: lightgreen;
@@ -323,58 +319,54 @@ span.describe {
     background-color: #3fff3f;
 }
 
-.rozklad-choice-menu-right {
+.rozklad_choice_menu_right {
     background-color: lightpink;
     height: 80px;
     color: #555;
-    /*padding: 15px 0;*/
     margin: 0;
 }
-.rozklad-choice-menu-right div{
+.rozklad_choice_menu_right div{
     height: 100%;
 }
-.rozklad-choice-menu-right div:hover{
+.rozklad_choice_menu_right div:hover{
     background-color: #d65c95;
     cursor: pointer;
     color: lightpink;
 }
-.rozklad-choice-menu-right-list {
+.rozklad_choice_menu_right_list {
     background-color: #f6ffaf;
     height: 500px;
 }
 .rozklad_choice_menu_right_active {
     background-color: hotpink;
 }
-.rozklad-manu-icon {
+.rozklad_manu_icon {
     margin-top: 12px;
 }
 
 
-/*left menu list*/
-.rozklad-choice{
+/*left menu list--------------------------------------------*/
+.rozklad_choice{
     height: 500px;
     overflow-y: auto;
     background-color: lightBlue;
 }
-.rozklad-choice h3 {
+.rozklad_choice h3 {
     font-size: 24px;
     font-family: 'Lobster', cursive;
     color: #555;
     word-wrap: break-word;
     margin: 10px;
     padding: 10px;
-    /*border: 3px solid #555;*/
     border-radius: 30px;
 }
-.rozklad-choice h3:hover {
+.rozklad_choice h3:hover {
     cursor: pointer;
     background-color: #05a1b5;
     color: #bff0ff;
-    /*border: 3px solid #555;*/
 }
 .rozklad_choice_noActive {
     background-color: lightskyblue;
-    /*border: 3px solid blue;*/
 }
 .rozklad_choice_active {
     background-color: deepskyblue;
@@ -405,28 +397,24 @@ span.describe {
     border-radius: 3px;
 }
 
-
-/*left menu img*/
-#rozklad-transport-img {
+/*left menu img-------------------------------------*/
+#rozklad_transport_img {
     padding: 10px;
     margin: 10px;
     background-color: lightskyblue;
     border-radius: 50px;
 }
-.rozklad-transport-img{
-    /*margin: 5px;*/
+.rozklad_transport_img{
     padding: 10px;
     height: 33%;
     width: 33%;
 }
-.rozklad-transport-img:hover{
+.rozklad_transport_img:hover{
     cursor: pointer;
     background-color: #05a1b5;
     border-radius: 40px;
-    /*color: lightskyblue;*/
 }
-.rozklad-transport-img img{
-    /*opacity: 0.7;*/
+.rozklad_transport_img img{
     height: 100%;
     width: 100%;
 }
@@ -435,137 +423,115 @@ span.describe {
     border-radius: 40px;
 }
 
-/*left menu table*/
+/*left menu table-----------------------------------------*/
 
-.rozklad-choice-way {
-    /*height: inherit;*/
-    /*margin-top: 20px;*/
+.rozklad_choice_way {
     padding: 0;
 }
-.rozklad-choice-way div{
+.rozklad_choice_way div{
     padding: 0;
-    margin: 6px 0;
-    /*height: 90px;*/
-    /*width: 90px;*/
+    margin: 0 auto;
 }
-.rozklad-choice-way div p{
+.rozklad_choice_way_element{
     font-size: 18px;
     font-family: 'Lobster', cursive;
     color: #555;
-    text-align: center;
     height: 50px;
     width: 50px;
-    margin: auto;
-    /*margin-top: 20px;*/
-    padding: 0;
     background-color: lightskyblue;
-    border: 2px solid lightskyblue;
     border-radius: 5px;
 }
-.rozklad-choice-way div p span{
-    display: block;
-    margin-top: 11px;
+.rozklad_choice_way_element div{
+    margin-top: 10px;
 }
-.rozklad-choice-way div p:hover{
+.rozklad_choice_way_element div p{
+    position: absolute;
+    margin-top: 11px;
+    top: auto;
+    width: 50px;
+    text-align: center;
+}
+.rozklad_choice_way_element:hover{
     background-color: #05c7dd;
-    border: 2px solid #05c7dd;
     color: #bff0ff;
     cursor: pointer;
 }
 .rozklad_choice_way_active {
-
+    background-color: #05e6ff;
 }
 
-/*.rozklad-choice-table h3 {*/
-    /*font-size: 24px;*/
-    /*font-family: 'Lobster', cursive;*/
-    /*color: #555;*/
-    /*word-wrap: break-word;*/
-    /*margin: 10px;*/
-    /*padding: 10px;*/
-    /*border: 3px solid #555;*/
-    /*border-radius: 30px;*/
-/*}*/
-/*.rozklad-choice-table h3:hover {*/
-    /*cursor: pointer;*/
-    /*background-color: deepskyblue;*/
-    /*color: blue;*/
-    /*border: 3px solid blue;*/
-/*}*/
+/*Description head------------------------------------------*/
+.rozklad_tour_description_head {
+    margin: 0;
+    background-color: #f2ff92;
+}
+.rozklad_tour_description_head h3{
+    font-family: 'Lobster', cursive;
+    color: #555;
+    margin: 10px 0;
+    padding: 10px 0;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-/*.rozklad-choice-table p {*/
-    /*font-size: 12px;*/
-    /*color: #555;*/
-    /*word-wrap: break-word;*/
-    /*margin: 10px 20px;*/
-    /*padding: 0;*/
-/*}*/
-/*.rozklad-choice-table p:hover {*/
-    /*cursor: pointer;*/
-    /*color: #333;*/
-/*}*/
+.rozklad_tour_description_img{
+    padding: 0;
+}
+.rozklad_tour_description_img div img{
+    margin: 9px 0 0 9px;
+    height: 50px;
+    width: 50px;
+}
+.rozklad_tour_description_icon {
+    padding: 0;
+    top: 9px;
+    text-align: center;
+}
+.rozklad_tour_description_icon i {
+    padding: 7px;
+    margin: 0 auto;
+    border: 3px solid #555;
+    border-radius: 5px;
+}
+.rozklad_tour_description_icon i:hover {
+    cursor: pointer;
+    background-color: #ffff61;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*.rozklad-choice-menu {*/
-    /*background-color: lightBlue;*/
-    /*border: 1px solid #ccdbeb;*/
-    /*color: #555;*/
-    /*margin: 0 0 18px 0;*/
-    /*padding: 0;*/
-/*}*/
-/*.rozklad-choice-menu div{*/
-    /*padding: 15px 0;*/
-/*}*/
-/*.rozklad-choice-menu div:hover {*/
-    /*color: #333;*/
-    /*cursor: pointer;*/
-    /*box-shadow: 0 1px 3px rgba(12, 36, 255, 0.3);*/
-/*}*/
-/*.rozklad-choice-transport {*/
-    /*background-color: lightyellow;*/
-    /*border: 1px solid #ebdfb7;*/
-    /*color: #555;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
-/*}*/
-/*.rozklad-choice-transport p{*/
-    /*padding: 5px;*/
-    /*margin: 0;*/
-    /*font-size: 14px;*/
-/*}*/
-/*.rozklad-choice-transport p:hover {*/
-    /*color: #000;*/
-    /*cursor: pointer;*/
-    /*/!*box-shadow: 0 0 1px 1px rgba(255, 217, 0, 0.3);*!/*/
-/*}*/
-/*.rozklad-choice-table {*/
-    /*/!*display: inline-block;*!/*/
-    /*/!*border: 1px solid #ebdfb7;*!/*/
-    /*/!*border-radius: 3px;*!/*/
-    /*padding: 10px;*/
-    /*/!*margin: 5px;*!/*/
-/*}*/
-/*.rozklad-choice-table span {*/
-    /*/!*display: inline-block;*!/*/
-    /*border: 1px solid #ebdfb7;*/
-    /*border-radius: 3px;*/
-    /*padding: 10px 18px;*/
-    /*margin: 10px 0;*/
-/*}*/
-/*.rozklad-choice-table span:hover {*/
-    /*color: #000;*/
-    /*cursor: pointer;*/
-    /*box-shadow: 0 1px 3px rgba(255, 217, 0, 0.3);*/
-/*}*/
-
+.rozklad_route_description_content {
+    max-height: 400px;
+    margin: 20px;
+    font-size: 16px;
+    color: #555;
+    overflow-y: auto;
+}
+.rozklad_station_table{
+    margin: 0;
+    padding: 0;
+}
+.rozklad_station_table i{
+    color: red;
+}
+.rozklad_station_table dt{
+    width: 30px;
+    text-align: center;
+}
+.rozklad_station_table dd{
+    margin: 0 0 0 40px;
+}
+.rozklad_station_table:hover{
+    cursor: pointer;
+    color: #000;
+    /*font-weight: 600;*/
+}
+.rozklad_station_table_active {
+    color: #000;
+    font-weight: 600;
+    background-color: #ffff61;
+    border-radius: 5px;
+}
+.qqq {
+    background-color: #ffff61;
+}
