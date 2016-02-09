@@ -291,6 +291,13 @@
             }
         }
     }
+    function travelTimesDir() {
+        return {
+            link: function (scope, element, attributes) {
+                console.log('travelTimesDir is show')
+            }
+        }
+    }
     angular.module('phonecatApp')
         .directive('rozkladDir', rozkladDir)
         .directive('centrationDir', centrationDir)
@@ -299,4 +306,5 @@
         .directive('travelModesDir', travelModesDir)
         .directive('searchBoxDir', searchBoxDir)
         .directive('travelStationsDir', travelStationsDir)
+        .directive('travelTimesDir', travelTimesDir)
 })();

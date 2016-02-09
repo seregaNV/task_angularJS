@@ -463,13 +463,14 @@ span.describe {
 /*Description head------------------------------------------*/
 .rozklad_tour_description_head {
     margin: 0;
-    background-color: #f2ff92;
+    background-color: #fff973;
 }
 .rozklad_tour_description_head h3{
     font-family: 'Lobster', cursive;
     color: #555;
     margin: 10px 0;
     padding: 10px 0;
+    text-align: center;
     white-space: nowrap;
     word-wrap: normal;
     overflow: hidden;
@@ -497,12 +498,15 @@ span.describe {
 }
 .rozklad_tour_description_icon i:hover {
     cursor: pointer;
-    background-color: #ffff61;
+    background-color: yellow;
 }
 
+/*Description content------------------------------------------*/
 .rozklad_route_description_content {
-    max-height: 400px;
-    margin: 20px;
+    background-color: #fcffd6;
+    border-radius: 10px;
+    max-height: 340px;
+    margin: 10px;
     font-size: 16px;
     color: #555;
     overflow-y: auto;
@@ -532,6 +536,65 @@ span.describe {
     background-color: #ffff61;
     border-radius: 5px;
 }
-.qqq {
-    background-color: #ffff61;
+/*.qqq {*/
+    /*background-color: #ffff61;*/
+/*}*/
+.rozklad_route_description_times {
+    max-height: 340px;
+    margin: 20px;
+    font-size: 16px;
+    color: #555;
+    overflow-y: auto;
 }
+
+/*controlling for tour---------------------------------------*/
+.rozklad_tour_description_control {
+    padding: 7px;
+    /*margin: 0 auto;*/
+    /*border: 3px solid #777;*/
+    border-radius: 30px;
+    margin: 10px 50px;
+    background-color: #f2ff92;
+}
+.rozklad_tour_description_stationName{
+    font-family: 'Lobster', cursive;
+    font-size: 20px;
+    color: #777;
+    margin: 5px 0;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.rozklad_tour_description_control_icon {
+    padding: 0;
+    /*top: 9px;*/
+    text-align: center;
+    color: #777;
+}
+.rozklad_tour_description_control_icon i {
+    padding: 7px;
+    margin: 0 auto;
+    border: 3px solid #777;
+    border-radius: 5px;
+}
+.rozklad_tour_description_control_icon i:hover {
+    cursor: pointer;
+    background-color: yellow;
+}
+.rozklad_tour_description_control_icon_active {
+    background-color: #fff973;
+}
+.rozklad_tour_description_control_direction:hover {
+    cursor: pointer;
+    color: #333;
+}
+/*title page---------------------------------------*/
+.rozklad_tour_description_title img{
+    width: 100%;
+}
+.rozklad_tour_description_title p{
+    margin: 10px;
+    text-indent: 20px
+}
+
+/**/

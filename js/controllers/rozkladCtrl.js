@@ -137,8 +137,10 @@
     //    });
     //}
     function rozkladStationsCtrl($scope) {
+        var indexNumber, quantityStations;
         $scope.$on('isLoadToCtr', function(event, args) {
             var data = args.stations;
+            $scope.choiceDescription = 'list';
             $scope.routeName = $scope.route.name;
             $scope.routeNumber = $scope.route.number;
             $scope.checkType = $scope.route.type;
@@ -146,7 +148,9 @@
             $scope.addRoutList = function(index) {
                 var time = 0;
                 var stations = [];
-                for (var i = 0; i < data.length; i++) {
+                indexNumber = index;
+                quantityStations = data.length;
+                for (var i = 0; i < quantityStations; i++) {
                     var station = {};
                     if (index < i){
                         time += data[i].toStation;
@@ -155,23 +159,47 @@
                         station.toStation = '';
                     } else if (index == i) {
                         station.toStation = 0;
-                        setDepot(data[i]);
+                        setDepot(data[i-1], data[i], data[i+1]);
                     }
                     station.name = data[i].name;
                     stations.push(station);
                 }
                 $scope.stations = stations;
-
             };
             $scope.addRoutList(0);
         });
         //$scope.$on('$destroy', function() {
         //listen();
         //});
-        var setDepot = function(data) {
+        var setDepot = function(before, data, after) {
+            $scope.stationName = data.name;
             $scope.weekdays = data.weekdays;
             $scope.weekend = data.weekend;
+            if (!before) {
+                $scope.previousStation = 'start';
+                $scope.nextStation = after.toStation + "'";
+            } else if (!after){
+                $scope.nextStation = 'end';
+                $scope.previousStation = data.toStation + "'";
+            } else {
+                $scope.nextStation = after.toStation + "'";
+                $scope.previousStation = data.toStation + "'";
+            }
         };
+        $scope.getPreStation = function() {
+            console.log('getPreStation - ', indexNumber);
+            if (indexNumber > 0) {
+                indexNumber -= 1;
+                $scope.addRoutList(indexNumber);
+            }
+        };
+        $scope.getNextStation = function() {
+            console.log('getNextStation - ', indexNumber);
+            if (indexNumber < quantityStations - 1) {
+                indexNumber += 1;
+                $scope.addRoutList(indexNumber);
+            }
+        }
     }
     angular.module('phonecatApp')
         .controller('RozkladCtrl', ['$scope', '$http', '$rootScope', rozkladCtrl])
