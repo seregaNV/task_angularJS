@@ -193,7 +193,12 @@
                             </dl>
                         </div>
                         <div ng-switch-when="description">
-                            <travel-times-dir></travel-times-dir>
+                            <div travel-timetable-dir>
+                                <div class="row">
+                                    <div id="rozklad_timetable_weekdays" class="col-xs-6"></div>
+                                    <div id="rozklad_timetable_weekend" class="col-xs-6"></div>
+                                </div>
+                            </div>
                             <!--<div class="row rozklad_route_description_times">-->
                                 <!--<div class="col-xs-12 col-sm-6">-->
                                     <!--<dl class="dl-horizontal rozklad_station_table" ng-repeat="(hours, minutes) in weekdays">-->

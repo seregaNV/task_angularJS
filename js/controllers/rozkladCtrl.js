@@ -140,6 +140,7 @@
         var indexNumber, quantityStations;
         $scope.$on('isLoadToCtr', function(event, args) {
             var data = args.stations;
+            $scope.responseData = args.stations;
             $scope.choiceDescription = 'list';
             $scope.routeName = $scope.route.name;
             $scope.routeNumber = $scope.route.number;
@@ -167,6 +168,7 @@
                 $scope.stations = stations;
             };
             $scope.addRoutList(0);
+            $scope.$broadcast('isLoadToDir', {stations: data});
         });
         //$scope.$on('$destroy', function() {
         //listen();
@@ -187,14 +189,12 @@
             }
         };
         $scope.getPreStation = function() {
-            console.log('getPreStation - ', indexNumber);
             if (indexNumber > 0) {
                 indexNumber -= 1;
                 $scope.addRoutList(indexNumber);
             }
         };
         $scope.getNextStation = function() {
-            console.log('getNextStation - ', indexNumber);
             if (indexNumber < quantityStations - 1) {
                 indexNumber += 1;
                 $scope.addRoutList(indexNumber);

@@ -291,10 +291,63 @@
             }
         }
     }
-    function travelTimesDir() {
+    function travelTimetableDir() {
         return {
             link: function (scope, element, attributes) {
-                console.log('travelTimesDir is show')
+
+                var weekdaysContainer = document.getElementById('rozklad_timetable_weekdays');
+                var weekendContainer = document.getElementById('rozklad_timetable_weekend');
+                var date = new Date();
+                var weekdays = scope.$parent.responseData[0].weekdays;
+                var weekend = scope.$parent.responseData[0].weekend;
+                //console.log('travelTimesDir date - ' + date.getHours() + '   ' + date.getMinutes());
+                //console.log(weekdays);
+                //console.log(weekend);
+                //weekdaysContainer.append(dl_container);
+                function timetablesConstructor(data, place) {
+                    var dl_container = angular.element('<dl>');
+                    dl_container.addClass('dl-horizontal rozklad_station_table');
+                    dl_container.appendTo(place);
+                    for (var key in data) {
+                        var dt_container = angular.element('<dt>');
+                        dl_container.append(dt_container);
+                        dt_container.append(key);
+                        var dd_container = angular.element('<dd>');
+                        dl_container.append(dd_container);
+                        var span_container = angular.element('<span>');
+
+                        for (var i = 0; i < data[key].timetable.length; i++) {
+                            span_container.append(data[key].timetable[i]);
+                        }
+
+                        dd_container.append(span_container);
+
+                    }
+
+                }
+                timetablesConstructor(weekdays, weekdaysContainer);
+                timetablesConstructor(weekend, weekendContainer);
+
+
+    //      <dl class="dl-horizontal rozklad_station_table" ng-repeat="(hours, minutes) in weekdays">
+    //          <dt>
+    //              <span>{{ hours }}</span>
+    //          </dt>
+    //          <dd>
+    //              <span ng-repeat="minute in minutes.timetable">
+    //                  {{ minute }}
+    //              </span>
+    //          </dd>
+    //      </dl>
+    //
+                //var inputElement = angular.element('<input>');
+                //element.append(inputElement);
+                //inputElement.attr({id: 'rozklad-sb-input'})
+                //    .addClass('rozklad_sb_controls')
+                //    .attr({type: 'text'})
+                //    .attr({placeholder: 'Search Box'});
+                //
+                //inputElement.insertBefore(mapElement);
             }
         }
     }
@@ -306,5 +359,5 @@
         .directive('travelModesDir', travelModesDir)
         .directive('searchBoxDir', searchBoxDir)
         .directive('travelStationsDir', travelStationsDir)
-        .directive('travelTimesDir', travelTimesDir)
+        .directive('travelTimetableDir', travelTimetableDir)
 })();
