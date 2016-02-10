@@ -158,17 +158,19 @@
                         </div>
                     </div>
                     <div ng-switch on = "choiceDescription">
+
+
                         <div class="row rozklad_tour_description_control">
                             <div class="col-xs-2 rozklad_tour_description_control_icon">
                                 <i ng-click="choiceDescription = 'list'"
                                    class="fa fa-2x fa-list-ol"
                                    ng-class="{rozklad_tour_description_control_icon_active: choiceDescription == 'list'}"></i>
                             </div>
-                            <div class="col-xs-8 rozklad_tour_description_stationName">
+                            <div class="col-xs-8 rozklad_tour_description_control_panel">
                                 <span class="rozklad_tour_description_control_direction pull-left" ng-click="getPreStation()">
                                     <i class="fa fa-angle-double-left"></i> {{ previousStation }} <i class="fa fa-angle-left"></i>
                                 </span>
-                                {{ stationName }}
+                                <span class="rozklad_tour_description_stationName">{{ stationName }}</span>
                                 <span class="rozklad_tour_description_control_direction pull-right" ng-click="getNextStation()">
                                     <i class="fa fa-angle-right"></i> {{ nextStation }} <i class="fa fa-angle-double-right"></i>
                                 </span>
@@ -179,6 +181,8 @@
                                    ng-class="{rozklad_tour_description_control_icon_active: choiceDescription == 'description'}"></i>
                             </div>
                         </div>
+
+
                         <div class="rozklad_route_description_content"
                              ng-switch-when="list">
                             <dl class="dl-horizontal rozklad_station_table"
@@ -194,11 +198,16 @@
                         </div>
                         <div ng-switch-when="description">
                             <div travel-timetable-dir>
-                                <div class="row">
-                                    <div id="rozklad_timetable_weekdays" class="col-xs-6"></div>
-                                    <div id="rozklad_timetable_weekend" class="col-xs-6"></div>
+                                <div class="row rozklad_route_description_timetable">
+                                    <div id="rozklad_timetable_weekdays" class="col-xs-6">
+                                        <p class="text-center">Pобочі дні.</p>
+                                    </div>
+                                    <div id="rozklad_timetable_weekend" class="col-xs-6">
+                                        <p class="text-center">Вихідні дні.</p>
+                                    </div>
                                 </div>
                             </div>
+                            <p class="rozklad_timetable_depot_marker"><span>59</span> - прямує в депо.</p>
                             <!--<div class="row rozklad_route_description_times">-->
                                 <!--<div class="col-xs-12 col-sm-6">-->
                                     <!--<dl class="dl-horizontal rozklad_station_table" ng-repeat="(hours, minutes) in weekdays">-->

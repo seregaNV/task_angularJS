@@ -38,6 +38,7 @@
                 console.log('Loading.');
                 $http.get(urlQuery)
                     .success(function(data) {
+                        //if (listen) listen();
                         $scope.$watch('choiceDetail', function(newValue, oldValue) {
                             if (newValue === 'map') {
                                 $scope.$broadcast('isLoadToDir', {stations: data});
@@ -45,8 +46,9 @@
                                 $scope.$broadcast('isLoadToCtr', {stations: data});
                             }
                         });
-                        //$scope.routeName = data.name;
-                        //$scope.routeNumber = data.number;
+                        //setTimeout(function() {
+                        //    listen();
+                        //}, 1000);
                     })
                     .error(function(error) {
                         console.error('error: ', error);
@@ -139,6 +141,7 @@
     function rozkladStationsCtrl($scope) {
         var indexNumber, quantityStations;
         $scope.$on('isLoadToCtr', function(event, args) {
+            console.log('isLoadToCtr');
             var data = args.stations;
             $scope.responseData = args.stations;
             $scope.choiceDescription = 'list';
