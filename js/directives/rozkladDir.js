@@ -117,7 +117,6 @@
                             'Error: The Geolocation service failed.' :
                             'Error: Your browser doesn\'t support geolocation.');
                     }
-                    map.setCenter(pos);
                 });
             }
         }
@@ -294,7 +293,7 @@
     function travelTimetableDir() {
         return {
             link: function (scope, element, attributes) {
-
+                var weekdaysContainer, weekendContainer;
                 function addMessage(place) {
                     var cont = angular.element('<h3>');
                     cont.addClass('text-center')
@@ -302,17 +301,16 @@
                         .appendTo(place);
                 }
                 function chackAndStart() {
-                    var weekdaysContainer = document.getElementById('rozklad_timetable_weekdays');
-                    var weekendContainer = document.getElementById('rozklad_timetable_weekend');
-                    var weekdays = scope.$parent.responseData[0].weekdays;
-                    var weekend = scope.$parent.responseData[0].weekend;
-                    !$.isEmptyObject(weekdays) ? timetablesConstructor(weekdays, weekdaysContainer) : addMessage(weekdaysContainer);
-                    !$.isEmptyObject(weekend) ? timetablesConstructor(weekend, weekendContainer) : addMessage(weekendContainer);
+                    weekdaysContainer = $('#rozklad_timetable_weekdays');
+                    weekendContainer = $('#rozklad_timetable_weekend');
+                    var weekdays = scope.$parent.responseData.weekdays;
+                    var weekend = scope.$parent.responseData.weekend;
+                    $.isEmptyObject(weekdays) ? addMessage(weekdaysContainer) : timetablesConstructor(weekdays, weekdaysContainer);
+                    $.isEmptyObject(weekend) ? addMessage(weekendContainer) : timetablesConstructor(weekend, weekendContainer);
                 }
                 function timetablesConstructor(data, place) {
                     var date = new Date();
                     scope.$parent.dateNow = date;
-                    console.log('travelTimesDir date - ' + date.getHours() + '   ' + date.getMinutes());
                     var addClassIf = false;
                     var dl_container = angular.element('<dl>');
                     dl_container.addClass('dl-horizontal rozklad_station_timetable');
@@ -347,7 +345,14 @@
                         }
                     }
                 }
-                chackAndStart();
+                scope.$watch('responseData', function(newValue, oldValue) {
+                    if (weekendContainer && weekdaysContainer) {
+                        console.log('html');
+                        weekdaysContainer.find('dl, h3').remove();
+                        weekendContainer.find('dl, h3').remove();
+                    }
+                    chackAndStart();
+                });
             }
         }
     }

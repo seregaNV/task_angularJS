@@ -1,54 +1,29 @@
 (function() {
     'use strict';
-    function rozkladCtrl($scope, $http, $rootScope) {
-    //function rozkladCtrl($scope, DirectionFactory) {
-
-        //DirectionFactory.query({file: 'transports'}, function(data) {
-        //    $scope.data = data;
-        //    $scope.trams = [];
-        //    $scope.trolleybuses = [];
-        //    $scope.buses = [];
-        //    for (var i = 0; i < data.length; i++) {
-        //        if (data[i].type == 'tram') {
-        //            $scope.trams.push(data[i]);
-        //        } else if (data[i].type == 'trolleybus') {
-        //            $scope.trolleybuses.push(data[i]);
-        //        } else if (data[i].type == 'bus') {
-        //            $scope.buses.push(data[i]);
-        //        }
-        //    }
-        //});
-        //DirectionFactory.query({file: 'tr'}, function(stations) {
-        //    $scope.stations = stations;
-        //    $scope.$broadcast('isLoad', {});
-        //    $scope.$watch('choiceDetail', function(oldValue, newValue) {
-        //        $scope.$broadcast('isLoad', {});
-        //    });
-        //});
-        //console.log($scope);
+    function rozkladCtrl($scope, $rootScope,  $http) {
 
         $scope.choiceDetail = 'list';
-
         $scope.getRoute = function(query) {
+            $rootScope.indexNumber = 0;
             $scope.route = query;
-            var urlQuery = 'http://localhost:3001/' + query.file;
+            var urlQuery = 'http://localhost:3001/route?direction=' + query.file;
             if ($scope.routeCheck == query.file) {
                 console.log('Data already loaded.');
             } else {
                 console.log('Loading.');
                 $http.get(urlQuery)
                     .success(function(data) {
-                        //if (listen) listen();
+                        //if ($scope.chackWatch && ($scope.chackWatch != query)) listen();
                         $scope.$watch('choiceDetail', function(newValue, oldValue) {
                             if (newValue === 'map') {
                                 $scope.$broadcast('isLoadToDir', {stations: data});
                             } else if (newValue === 'list') {
                                 $scope.$broadcast('isLoadToCtr', {stations: data});
                             }
+                            //$scope.chackWatch = query;
                         });
-                        //setTimeout(function() {
-                        //    listen();
-                        //}, 1000);
+                        //$scope.$watch('route', function(newValue, oldValue) {listen()});
+                        //listen();
                     })
                     .error(function(error) {
                         console.error('error: ', error);
@@ -112,67 +87,42 @@
             $scope.checkType = $scope.route.type;
         });
     }
-    //function rozkladGetRouteCtrl($scope, $http, $rootScope) {
-    //    $scope.route = function(query) {
-    //        console.log(query);
-    //        var urlQuery = 'http://localhost:3001/' + query;
-    //        $http.get(urlQuery)
-    //            .success(function(data) {
-    //                $rootScope.stations = data;
-    //                $rootScope.$broadcast('isLoad', {stations: data});
-    //            })
-    //            .error(function(err) {
-    //                console.error('error: ', err);
-    //            });
-    //    };
-    //}
-    //function rozkladGetStopsCtrl($scope, $rootScope) {
-    //    $scope.choiceDetail = 'map';
-    //    $scope.$watch('choiceDetail', function(newValue, oldValue) {
-    //        //console.log($scope.$parent.$parent);
-    //        var checkValue = newValue;
-    //        if (checkValue === 'map') {
-    //            console.log('choiceDetail');
-    //            var data = $rootScope.stations;
-    //            $rootScope.$broadcast('isLoad', {stations: data});
-    //        }
-    //    });
-    //}
-    function rozkladStationsCtrl($scope) {
-        var indexNumber, quantityStations;
+
+    function rozkladStationsCtrl($scope, $rootScope) {
+        var indexNumber = 0, quantityStations, data;
         $scope.$on('isLoadToCtr', function(event, args) {
             console.log('isLoadToCtr');
-            var data = args.stations;
-            $scope.responseData = args.stations;
+            console.log('indexNumber - ', indexNumber);
+            data = args.stations;
             $scope.choiceDescription = 'list';
             $scope.routeName = $scope.route.name;
             $scope.routeNumber = $scope.route.number;
             $scope.checkType = $scope.route.type;
-            $scope.start = 0;
-            $scope.addRoutList = function(index) {
-                var time = 0;
-                var stations = [];
-                indexNumber = index;
-                quantityStations = data.length;
-                for (var i = 0; i < quantityStations; i++) {
-                    var station = {};
-                    if (index < i){
-                        time += data[i].toStation;
-                        station.toStation = time + "'";
-                    } else if (index > i) {
-                        station.toStation = '';
-                    } else if (index == i) {
-                        station.toStation = 0;
-                        setDepot(data[i-1], data[i], data[i+1]);
-                    }
-                    station.name = data[i].name;
-                    stations.push(station);
-                }
-                $scope.stations = stations;
-            };
-            $scope.addRoutList(0);
-            $scope.$broadcast('isLoadToDir', {stations: data});
+            $scope.addRoutList($rootScope.indexNumber);
         });
+        $scope.addRoutList = function(index) {
+            var time = 0;
+            var stations = [];
+            indexNumber = index;
+            $scope.responseData = data[indexNumber];
+            $rootScope.indexNumber = index;
+            quantityStations = data.length;
+            for (var i = 0; i < quantityStations; i++) {
+                var station = {};
+                if (index < i){
+                    time += data[i].toStation;
+                    station.toStation = time + "'";
+                } else if (index > i) {
+                    station.toStation = '';
+                } else if (index == i) {
+                    station.toStation = 0;
+                    setDepot(data[i-1], data[i], data[i+1]);
+                }
+                station.name = data[i].name;
+                stations.push(station);
+            }
+            $scope.stations = stations;
+        };
         //$scope.$on('$destroy', function() {
         //listen();
         //});
@@ -194,20 +144,22 @@
         $scope.getPreStation = function() {
             if (indexNumber > 0) {
                 indexNumber -= 1;
+                $scope.responseData = data[indexNumber];
                 $scope.addRoutList(indexNumber);
             }
         };
         $scope.getNextStation = function() {
             if (indexNumber < quantityStations - 1) {
                 indexNumber += 1;
+                $scope.responseData = data[indexNumber];
                 $scope.addRoutList(indexNumber);
             }
         }
     }
     angular.module('phonecatApp')
-        .controller('RozkladCtrl', ['$scope', '$http', '$rootScope', rozkladCtrl])
+        .controller('RozkladCtrl', ['$scope', '$rootScope', '$http', rozkladCtrl])
         .controller('RozkladGetTransportsCtrl', ['$scope', '$http', rozkladGetTransportsCtrl])
-        .controller('RozkladStationsCtrl', ['$scope', rozkladStationsCtrl])
+        .controller('RozkladStationsCtrl', ['$scope', '$rootScope', rozkladStationsCtrl]);
         //.controller('RozkladGetRouteCtrl', ['$scope', '$http', '$rootScope', rozkladGetRouteCtrl])
         //.controller('RozkladGetStopsCtrl', ['$scope', '$rootScope', rozkladGetStopsCtrl])
         //angular.module('phonecatApp').controller('RozkladCtrl', ['$scope', 'DirectionFactory', rozkladCtrl]);
