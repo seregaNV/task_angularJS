@@ -3,6 +3,7 @@
     function rozkladCtrl($scope, $rootScope,  $http) {
 
         $scope.choiceDetail = 'list';
+        var chackWatch;
         $scope.getRoute = function(query) {
             $rootScope.indexNumber = 0;
             $scope.route = query;
@@ -13,8 +14,11 @@
                 console.log('Loading.');
                 $http.get(urlQuery)
                     .success(function(data) {
+                        if (chackWatch) chackWatch();
+                        $scope.checkNumber = $scope.route.number;
+                        $scope.checkType = $scope.route.type;
                         //if ($scope.chackWatch && ($scope.chackWatch != query)) listen();
-                        $scope.$watch('choiceDetail', function(newValue, oldValue) {
+                        chackWatch = $scope.$watch('choiceDetail', function(newValue, oldValue) {
                             if (newValue === 'map') {
                                 $scope.$broadcast('isLoadToDir', {stations: data});
                             } else if (newValue === 'list') {
@@ -82,22 +86,23 @@
             .error(function(err) {
                 console.error('error: ', err);
             });
-        $scope.$on('isLoadToCtr', function(event, args) {
-            $scope.checkNumber = $scope.route.number;
-            $scope.checkType = $scope.route.type;
-        });
+        //$scope.$on('isLoadToCtr', function(event, args) {
+        //$scope.$watch('choiceDetail', function(newValue, oldValue) {
+        //    console.log('choiceDetail');
+        //    $scope.checkNumber = $scope.route.number;
+        //    $scope.checkType = $scope.route.type;
+        //});
     }
 
     function rozkladStationsCtrl($scope, $rootScope) {
         var indexNumber = 0, quantityStations, data;
         $scope.$on('isLoadToCtr', function(event, args) {
             console.log('isLoadToCtr');
-            console.log('indexNumber - ', indexNumber);
             data = args.stations;
             $scope.choiceDescription = 'list';
             $scope.routeName = $scope.route.name;
             $scope.routeNumber = $scope.route.number;
-            $scope.checkType = $scope.route.type;
+            //$scope.checkType = $scope.route.type;
             $scope.addRoutList($rootScope.indexNumber);
         });
         $scope.addRoutList = function(index) {

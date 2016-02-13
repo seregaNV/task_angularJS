@@ -347,7 +347,6 @@
                 }
                 scope.$watch('responseData', function(newValue, oldValue) {
                     if (weekendContainer && weekdaysContainer) {
-                        console.log('html');
                         weekdaysContainer.find('dl, h3').remove();
                         weekendContainer.find('dl, h3').remove();
                     }
