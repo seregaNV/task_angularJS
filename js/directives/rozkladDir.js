@@ -24,6 +24,7 @@
                         position: google.maps.ControlPosition.LEFT_CENTER
                     }
                 });
+
                 scope.$emit('mapIsLoad', {
                     map: map
                 });
@@ -79,7 +80,6 @@
                                     lat: position.coords.latitude,
                                     lng: position.coords.longitude
                                 };
-
                                 marker = new google.maps.Marker({
                                     map: map,
                                     //icon: {
@@ -95,16 +95,19 @@
                                 //marker.setAnimation(google.maps.Animation.DROP);
                                 marker.setAnimation(google.maps.Animation.BOUNCE);
                                 marker.addListener('click', function() {
+                                    //infoWindow.setContent('666');
                                     infoWindow.open(map, marker);
                                 });
                                 //infoWindow.setPosition(pos);
                                 map.setCenter(pos);
                                 geoExist = infoWindow.getContent();
+                                scope.$emit('getStations', {
+                                    pos: pos
+                                });
                             }, function () {
                                 handleLocationError(true, infoWindow, map.getCenter());
                             });
                         } else {
-                            // Browser doesn't support Geolocation
                             handleLocationError(false, infoWindow, map.getCenter());
                         }
                     } else {
@@ -125,7 +128,9 @@
     function getPositionDir() {
         return {
             link: function (scope, element, attributes) {
+                var pos;
                 map.addListener('click', function(e) {
+                    pos = {lat: e.latLng.lat(), lng: e.latLng.lng()};
                     placeMarkerAndPanTo(e.latLng, map);
                 });
 
@@ -143,6 +148,9 @@
                         console.log('lat - ', e.latLng.lat());
                         console.log('lng - ', e.latLng.lng());
                         infowindow.open(map, marker);
+                    });
+                    scope.$emit('getStations', {
+                        pos: pos
                     });
                 }
             }
@@ -355,6 +363,45 @@
             }
         }
     }
+    function getStat() {
+        return {
+            link: function (scope, element, attributes) {
+                scope.$on('getStations', function(event, args) {
+                    console.log('getStations');
+                    var pos = args.pos;
+                    var infowindow = new google.maps.InfoWindow();
+                    var service = new google.maps.places.PlacesService(map);
+                    console.log(pos);
+                    service.nearbySearch({
+                        location: pos,
+                        radius: 500,
+                        types: ['transit_station']
+                    }, callback);
+
+                    function callback(results, status) {
+                        if (status === google.maps.places.PlacesServiceStatus.OK) {
+                            for (var i = 0; i < results.length; i++) {
+                                createMarker(results[i]);
+                            }
+                        }
+                    }
+
+                    function createMarker(place) {
+                        var placeLoc = place.geometry.location;
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: placeLoc
+                        });
+
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow.setContent(place.name);
+                            infowindow.open(map, this);
+                        });
+                    }
+                });
+            }
+        }
+    }
     angular.module('phonecatApp')
         .directive('rozkladDir', rozkladDir)
         .directive('centrationDir', centrationDir)
@@ -364,4 +411,5 @@
         .directive('searchBoxDir', searchBoxDir)
         .directive('travelStationsDir', travelStationsDir)
         .directive('travelTimetableDir', travelTimetableDir)
+        .directive('getStat', getStat)
 })();
