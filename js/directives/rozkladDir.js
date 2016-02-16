@@ -160,26 +160,33 @@
         return {
             link: function (scope, element, attributes) {
 
-                //scope.$on('mapIsLoad', function(event, args) {
-                //    //event.stopPropagation();
-                //    var directionsDisplay = new google.maps.DirectionsRenderer;
-                //    var directionsService = new google.maps.DirectionsService;
-                //    directionsDisplay.setMap(map);
-                //    calculateAndDisplayRoute(directionsService, directionsDisplay);
-                //    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-                //        directionsService.route({
-                //            origin: {lat: 49.2228688, lng: 28.456587499999998},
-                //            destination: {lat: 49.23842033794661, lng: 28.408777713775635   },
-                //            travelMode: google.maps.TravelMode['DRIVING']
-                //        }, function(response, status) {
-                //            if (status == google.maps.DirectionsStatus.OK) {
-                //                directionsDisplay.setDirections(response);
-                //            } else {
-                //                window.alert('Directions request failed due to ' + status);
-                //            }
-                //        });
-                //    }
-                //});
+                scope.$on('getPath', function(event, args) {
+                    var startPosition = args.start;
+                    var endPositions = args.end;
+                    for (var i = 0; i < endPositions.length; i++) {
+                        calculateAndDisplayRoute(endPositions[i]);
+                    }
+                    function calculateAndDisplayRoute(end) {
+                        var rendererOptions = {
+                            map: map,
+                            suppressMarkers : true
+                        };
+                        var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+                        var directionsService = new google.maps.DirectionsService;
+                        directionsDisplay.setMap(map);
+                        directionsService.route({
+                            origin: startPosition,
+                            destination: end,
+                            travelMode: google.maps.TravelMode['WALKING']
+                        }, function(response, status) {
+                            if (status == google.maps.DirectionsStatus.OK) {
+                                directionsDisplay.setDirections(response);
+                            } else {
+                                window.alert('Directions request failed due to ' + status);
+                            }
+                        });
+                    }
+                });
             }
         }
     }
@@ -209,6 +216,7 @@
 
                     var markers = [];
                     searchBox.addListener('places_changed', function() {
+                        var pos;
                         var places = searchBox.getPlaces();
 
                         if (places.length == 0) {
@@ -222,6 +230,7 @@
 
                         var bounds = new google.maps.LatLngBounds();
                         places.forEach(function(place) {
+                            pos = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
                             var icon = {
                                 url: place.icon,
                                 size: new google.maps.Size(71, 71),
@@ -230,7 +239,6 @@
                                 scaledSize: new google.maps.Size(25, 25)
                             };
 
-                            // Create a marker for each place.
                             markers.push(new google.maps.Marker({
                                 map: map,
                                 icon: icon,
@@ -239,13 +247,15 @@
                             }));
 
                             if (place.geometry.viewport) {
-                                // Only geocodes have viewport.
                                 bounds.union(place.geometry.viewport);
                             } else {
                                 bounds.extend(place.geometry.location);
                             }
                         });
                         map.fitBounds(bounds);
+                        scope.$emit('getStations', {
+                            pos: pos
+                        });
                     });
                 });
             }
@@ -367,14 +377,26 @@
         return {
             link: function (scope, element, attributes) {
                 scope.$on('getStations', function(event, args) {
-                    console.log('getStations');
+                    var stations = [];
                     var pos = args.pos;
+                    var radius = 300;
                     var infowindow = new google.maps.InfoWindow();
+
+                    var cityCircle = new google.maps.Circle({
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.2,
+                        strokeWeight: 2,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.1,
+                        map: map,
+                        center: pos,
+                        radius: radius
+                    });
+
                     var service = new google.maps.places.PlacesService(map);
-                    console.log(pos);
                     service.nearbySearch({
                         location: pos,
-                        radius: 500,
+                        radius: radius,
                         types: ['transit_station']
                     }, callback);
 
@@ -384,15 +406,21 @@
                                 createMarker(results[i]);
                             }
                         }
+                        scope.$emit('getPath', {
+                            start: pos,
+                            end: stations
+                        });
                     }
 
                     function createMarker(place) {
-                        var placeLoc = place.geometry.location;
+                        var placeLoc = {lat: place.geometry.location.lat(), lng: place.geometry.location.lng()};
+                        //var placeLoc = place.geometry.location;
                         var marker = new google.maps.Marker({
                             map: map,
-                            position: placeLoc
+                            position: placeLoc,
+                            icon: 'img/rozklad/stations.png'
                         });
-
+                        stations.push(placeLoc);
                         google.maps.event.addListener(marker, 'click', function() {
                             infowindow.setContent(place.name);
                             infowindow.open(map, this);
